@@ -56,7 +56,7 @@ final class ConfigurationTest extends TestCase
         self::assertSame(
             $expectedReportingLevel,
             Configuration::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles, ...$checkedNamespaces)
-                ->getReportingLevelForIssue($issue)
+                         ->getReportingLevelForIssue($issue)
         );
     }
 
@@ -67,12 +67,13 @@ final class ConfigurationTest extends TestCase
      */
     public function expectedReportingLevels() : array
     {
-        $classIssue    = $this->createMock(ClassIssue::class);
-        $propertyIssue = $this->createMock(PropertyIssue::class);
-        $methodIssue   = $this->createMock(MethodIssue::class);
-        $functionIssue = $this->createMock(FunctionIssue::class);
-        $argumentIssue = $this->createMock(ArgumentIssue::class);
-        $genericIssue  = $this->createMock(CodeIssue::class);
+        $classIssue             = $this->createMock(ClassIssue::class);
+        $propertyIssue          = $this->createMock(PropertyIssue::class);
+        $methodIssue            = $this->createMock(MethodIssue::class);
+        $functionIssue          = $this->createMock(FunctionIssue::class);
+        $argumentIssue          = $this->createMock(ArgumentIssue::class);
+        $anonymousArgumentIssue = $this->createMock(ArgumentIssue::class);
+        $genericIssue           = $this->createMock(CodeIssue::class);
 
         $classIssue->fq_classlike_name = 'Foo\\Bar\\Baz';
         $propertyIssue->property_id    = 'Foo\\Bar\\Baz$property';
@@ -206,7 +207,14 @@ final class ConfigurationTest extends TestCase
                 'AAA\\BBB\\',
                 'foo\\',
             ],
-            'generic issue type' => [
+            'anonymous argument issue'                             => [
+                $anonymousArgumentIssue,
+                Configuration::REPORT_SUPPRESS,
+                'AAA\\BBB',
+                'AAA\\BBB\\',
+                'foo\\',
+            ],
+            'generic issue type'                                   => [
                 $genericIssue,
                 Configuration::REPORT_SUPPRESS,
                 'AAA\\BBB',
