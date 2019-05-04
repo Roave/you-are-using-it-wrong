@@ -198,7 +198,10 @@ final class PackageAutoloadTest extends TestCase
     /**
      * @return array<string, mixed>
      *
-     * @psalm-return array<string, array{0: array{classmap?: array<int, string>}, 1: array<int, string>}>
+     * @psalm-return array<string, array{0: array{
+     *   classmap?: array<int, string>,
+     *   files?: array<int, string>
+     * }, 1: array<int, string>}>
      */
     public function expectedFiles() : array
     {
@@ -216,6 +219,20 @@ final class PackageAutoloadTest extends TestCase
             'definition with classmap pointing to file' => [
                 [
                     'classmap' => ['Composer/PackageAutoloadTest.php'],
+                ],
+                [
+                    realpath(__FILE__),
+                ],
+            ],
+            'definition with file pointing to non-existing file' => [
+                [
+                    'files' => ['non-existing'],
+                ],
+                [],
+            ],
+            'definition with file pointing to existing file' => [
+                [
+                    'files' => ['Composer/PackageAutoloadTest.php'],
                 ],
                 [
                     realpath(__FILE__),
