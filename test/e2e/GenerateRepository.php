@@ -46,7 +46,7 @@ final class GenerateRepository
                         'psr-4' => ['Project\\' => './src'],
                     ],
                     'require'           => array_merge(
-                        ['roave/enforce-type-checks' => 'dev-' . $currentGitVersion],
+                        ['roave/you-are-using-it-wrong' => 'dev-' . $currentGitVersion],
                         ...array_map(static function (string $dependency) use ($currentGitVersion) : array {
                             return [$dependency => 'dev-' . $currentGitVersion];
                         }, $dependencies)

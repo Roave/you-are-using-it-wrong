@@ -27,7 +27,7 @@ use function microtime;
 /** @internal this is a composer plugin: do not rely on it in your sources */
 final class Hook implements PluginInterface, EventSubscriberInterface
 {
-    private const THIS_PACKAGE_NAME = 'roave/enforce-type-checks';
+    private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
     /**
      * {@inheritDoc}

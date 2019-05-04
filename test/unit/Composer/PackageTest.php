@@ -45,8 +45,8 @@ final class PackageTest extends TestCase
     {
         return [
             [false, 'aaa/bbb'],
-            [true, 'roave/enforce-type-checks'],
-            [true, 'aaa/bbb', 'roave/enforce-type-checks'],
+            [true, 'roave/you-are-using-it-wrong'],
+            [true, 'aaa/bbb', 'roave/you-are-using-it-wrong'],
             [false, 'roave/potato'],
         ];
     }

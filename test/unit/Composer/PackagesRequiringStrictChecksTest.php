@@ -32,7 +32,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                                 'Foo\\Baz\\' => ['bbb'],
                             ],
                         ],
-                        'require'  => ['roave/enforce-type-checks' => '1.2.3'],
+                        'require'  => ['roave/you-are-using-it-wrong' => '1.2.3'],
                     ],
                     [
                         'name'     => 'ignore/me',
@@ -50,7 +50,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                                 'Baz\\Tab\\' => ['ddd'],
                             ],
                         ],
-                        'require'  => ['roave/enforce-type-checks' => '4.5.6'],
+                        'require'  => ['roave/you-are-using-it-wrong' => '4.5.6'],
                     ],
                 ],
                 'packages-dev' => [
@@ -61,7 +61,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                                 'Taz\\Tar\\' => ['eee'],
                             ],
                         ],
-                        'require'  => ['roave/enforce-type-checks' => '7.8.9'],
+                        'require'  => ['roave/you-are-using-it-wrong' => '7.8.9'],
                     ],
                 ],
             ]);

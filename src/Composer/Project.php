@@ -12,7 +12,7 @@ use function array_merge;
 /** @internal this class is only for supporting internal usage of locker data */
 final class Project
 {
-    private const THIS_PACKAGE_NAME = 'roave/enforce-type-checks';
+    private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
     /** @var PackageAutoload */
     private $rootPackageAutoload;

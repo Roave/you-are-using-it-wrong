@@ -1,7 +1,7 @@
 {
     "name": "test/repository-depending-on-type-checks",
     "require": {
-        "roave/enforce-type-checks": "*"
+        "roave/you-are-using-it-wrong": "*"
     },
     "autoload": {
         "psr-4": {
