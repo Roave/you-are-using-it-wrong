@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace RoaveTest\YouAreUsingItWrong\Composer;
 
-use Composer\Package\RootPackageInterface;
 use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Composer\Package;
 use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
+use function array_combine;
 
 /**
- * @covers \Roave\YouAreUsingItWrong\Composer\Package
- *
  * @uses \Roave\YouAreUsingItWrong\Composer\PackageAutoload
+ *
+ * @covers \Roave\YouAreUsingItWrong\Composer\Package
  */
 final class PackageTest extends TestCase
 {
-    /** @dataProvider dependencyCombinationsThatRequireStrictChecks */
+    /**
+     * @dataProvider dependencyCombinationsThatRequireStrictChecks
+     */
     public function testRequiresStrictChecks(
         bool $expected,
         string ...$dependencies
@@ -34,6 +36,11 @@ final class PackageTest extends TestCase
         );
     }
 
+    /**
+     * @return array<int, bool|string>
+     *
+     * @psalm-return array<int, array{0: bool, 1: string, 2?: string}>
+     */
     public function dependencyCombinationsThatRequireStrictChecks() : array
     {
         return [

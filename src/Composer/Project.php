@@ -6,6 +6,8 @@ namespace Roave\YouAreUsingItWrong\Composer;
 
 use Composer\Package\Locker;
 use Composer\Package\RootPackageInterface;
+use function array_filter;
+use function array_merge;
 
 /** @internal this class is only for supporting internal usage of locker data */
 final class Project
@@ -36,7 +38,7 @@ final class Project
         Locker $locker,
         string $currentWorkingDirectory
     ) : self {
-        /** @var array{packages: array<int, array{name: string}>, packages-dev: null|array<int, array{name: string}>} $lockData */
+        /** @psalm-var array{packages: array<int, array{name: string}>, packages-dev?: array<int, array{name: string}>} $lockData */
         $lockData = $locker->getLockData();
 
         return new self(

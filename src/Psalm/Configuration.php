@@ -12,6 +12,7 @@ use Psalm\Issue\CodeIssue;
 use Psalm\Issue\FunctionIssue;
 use Psalm\Issue\MethodIssue;
 use Psalm\Issue\PropertyIssue;
+use function stripos;
 
 /** @internal this class is only for configuring psalm according to the defaults of this repository */
 final class Configuration extends PsalmConfig
@@ -33,19 +34,19 @@ final class Configuration extends PsalmConfig
     public static function forStrictlyCheckedNamespacesAndProjectFiles(
         ProjectFileFilter $projectFileFilter,
         string ...$namespaces
-    ) {
+    ) : self {
         return new self($projectFileFilter, ...$namespaces);
     }
 
+    /** {@inheritDoc} */
     public function getReportingLevelForIssue(CodeIssue $e, array $suppressed_issues = []) : string
     {
-        if (
-            ($e instanceof ClassIssue && $this->identifierMatchesNamespace($e->fq_classlike_name))
+        if (($e instanceof ClassIssue && $this->identifierMatchesNamespace($e->fq_classlike_name))
             || ($e instanceof PropertyIssue && $this->identifierMatchesNamespace($e->property_id))
             || ($e instanceof MethodIssue && $this->identifierMatchesNamespace($e->method_id))
             || (
                 ($e instanceof FunctionIssue || $e instanceof ArgumentIssue)
-                && $this->identifierMatchesNamespace($e->function_id)
+                && $this->identifierMatchesNamespace((string) $e->function_id)
             )
         ) {
             return parent::getReportingLevelForIssue($e, $suppressed_issues);

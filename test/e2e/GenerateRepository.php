@@ -5,6 +5,19 @@ declare(strict_types=1);
 namespace RoaveE2ETest\YouAreUsingItWrong;
 
 use Symfony\Component\Process\Process;
+use const JSON_PRETTY_PRINT;
+use function array_filter;
+use function array_map;
+use function array_merge;
+use function copy;
+use function file_put_contents;
+use function glob;
+use function json_encode;
+use function mkdir;
+use function realpath;
+use function sys_get_temp_dir;
+use function tempnam;
+use function unlink;
 
 final class GenerateRepository
 {
@@ -34,18 +47,17 @@ final class GenerateRepository
                     ],
                     'require'           => array_merge(
                         ['roave/enforce-type-checks' => 'dev-' . $currentGitVersion],
-                        ...array_map(function (string $dependency) use ($currentGitVersion) : array {
+                        ...array_map(static function (string $dependency) use ($currentGitVersion) : array {
                             return [$dependency => 'dev-' . $currentGitVersion];
                         }, $dependencies)
                     ),
                     'repositories'      => array_merge(
-                        [
-                            // @NOTE: disabling packagist won't work because this repository has complex dependencies
-                            // that need to be looked up at very specific versions
-                            // ['packagist.org' => false],
-                        ],
+                        // @NOTE: disabling packagist won't work because this repository has complex dependencies
+                        // that need to be looked up at very specific versions
+                        // [['packagist.org' => false]],
+                        [],
                         array_map(
-                            function (string $path) : array {
+                            static function (string $path) : array {
                                 return [
                                     'type' => 'path',
                                     'url'  => $path,
@@ -53,16 +65,21 @@ final class GenerateRepository
                             },
                             array_merge(
                                 array_filter(
-                                    array_map('realpath', glob(__DIR__ . '/../../vendor/*/*')),
+                                    array_map(
+                                        static function (string $path) : string {
+                                            return (string) realpath($path);
+                                        },
+                                        glob(__DIR__ . '/../../vendor/*/*')
+                                    ),
                                     'is_dir'
                                 ),
                                 [
-                                    realpath(__DIR__ . '/../..'),
-                                    realpath(__DIR__ . '/../repositories/empty-repository'),
-                                    realpath(__DIR__ . '/../repositories/project-with-violations'),
-                                    realpath(__DIR__ . '/../repositories/repository-depending-on-type-checks'),
-                                    realpath(__DIR__ . '/../repositories/repository-indirectly-depending-on-type-checks'),
-                                    realpath(__DIR__ . '/../repositories/repository-not-depending-on-type-checks'),
+                                    (string) realpath(__DIR__ . '/../..'),
+                                    (string) realpath(__DIR__ . '/../repositories/empty-repository'),
+                                    (string) realpath(__DIR__ . '/../repositories/project-with-violations'),
+                                    (string) realpath(__DIR__ . '/../repositories/repository-depending-on-type-checks'),
+                                    (string) realpath(__DIR__ . '/../repositories/repository-indirectly-depending-on-type-checks'),
+                                    (string) realpath(__DIR__ . '/../repositories/repository-not-depending-on-type-checks'),
                                 ]
                             )
                         )

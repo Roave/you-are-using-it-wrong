@@ -12,11 +12,11 @@ use Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks;
 use Roave\YouAreUsingItWrong\Composer\Project;
 
 /**
- * @covers \Roave\YouAreUsingItWrong\Composer\Project
- *
  * @uses \Roave\YouAreUsingItWrong\Composer\Package
  * @uses \Roave\YouAreUsingItWrong\Composer\PackageAutoload
  * @uses \Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks
+ *
+ * @covers \Roave\YouAreUsingItWrong\Composer\Project
  */
 final class ProjectTest extends TestCase
 {
@@ -37,9 +37,7 @@ final class ProjectTest extends TestCase
                                 'Foo\\Baz\\' => ['bbb'],
                             ],
                         ],
-                        'require'  => [
-                            'roave/enforce-type-checks' => '1.2.3',
-                        ],
+                        'require'  => ['roave/enforce-type-checks' => '1.2.3'],
                     ],
                     [
                         'name'     => 'ignore/me',
@@ -48,9 +46,7 @@ final class ProjectTest extends TestCase
                                 'Ignore\\Me\\' => ['ccc'],
                             ],
                         ],
-                        'require'  => [
-                            'something/else' => '4.5.6',
-                        ],
+                        'require'  => ['something/else' => '4.5.6'],
                     ],
                     [
                         'name'     => 'baz/tab',
@@ -59,9 +55,7 @@ final class ProjectTest extends TestCase
                                 'Baz\\Tab\\' => ['ddd'],
                             ],
                         ],
-                        'require'  => [
-                            'roave/enforce-type-checks' => '4.5.6',
-                        ],
+                        'require'  => ['roave/enforce-type-checks' => '4.5.6'],
                     ],
                 ],
                 'packages-dev' => [
@@ -72,9 +66,7 @@ final class ProjectTest extends TestCase
                                 'Taz\\Tar\\' => ['eee'],
                             ],
                         ],
-                        'require'  => [
-                            'roave/enforce-type-checks' => '7.8.9',
-                        ],
+                        'require'  => ['roave/enforce-type-checks' => '7.8.9'],
                     ],
                 ],
             ]);
@@ -124,13 +116,9 @@ final class ProjectTest extends TestCase
                                 'Foo\\Baz\\' => ['bbb'],
                             ],
                         ],
-                        'require'  => [
-                            'roave/enforce-type-checks' => '1.2.3',
-                        ],
+                        'require'  => ['roave/enforce-type-checks' => '1.2.3'],
                     ],
-                    [
-                        'name' => 'roave/enforce-type-checks',
-                    ],
+                    ['name' => 'roave/enforce-type-checks'],
                 ],
             ]);
 
@@ -167,15 +155,11 @@ final class ProjectTest extends TestCase
                                 'Foo\\Baz\\' => ['bbb'],
                             ],
                         ],
-                        'require'  => [
-                            'roave/enforce-type-checks' => '1.2.3',
-                        ],
+                        'require'  => ['roave/enforce-type-checks' => '1.2.3'],
                     ],
                 ],
                 'packages-dev' => [
-                    [
-                        'name' => 'roave/enforce-type-checks',
-                    ],
+                    ['name' => 'roave/enforce-type-checks'],
                 ],
             ]);
 

@@ -7,24 +7,34 @@ namespace RoaveTest\YouAreUsingItWrong\Composer;
 use Composer\Package\RootPackageInterface;
 use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
+use function realpath;
 
 /** @covers \Roave\YouAreUsingItWrong\Composer\PackageAutoload */
 final class PackageAutoloadTest extends TestCase
 {
-    /** @dataProvider expectedDirectories */
+    /**
+     * @param array<string, mixed> $autoloadDefinition
+     * @param array<int, string>   $expectedDirectories
+     *
+     * @dataProvider expectedDirectories
+     */
     public function testDirectoriesFromAutoloadDefinition(
         array $autoloadDefinition,
         array $expectedDirectories
     ) : void {
         self::assertSame(
             $expectedDirectories,
-            PackageAutoload
-                ::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
-                ->directories()
+            PackageAutoload::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
+                           ->directories()
         );
     }
 
-    /** @dataProvider expectedDirectories */
+    /**
+     * @param array<string, mixed> $autoloadDefinition
+     * @param array<int, string>   $expectedDirectories
+     *
+     * @dataProvider expectedDirectories
+     */
     public function testDirectoriesFromComposerRootPackage(
         array $autoloadDefinition,
         array $expectedDirectories
@@ -37,12 +47,19 @@ final class PackageAutoloadTest extends TestCase
 
         self::assertSame(
             $expectedDirectories,
-            PackageAutoload
-                ::fromComposerRootPackage($rootPackage, realpath(__DIR__ . '/..'))
-                ->directories()
+            PackageAutoload::fromComposerRootPackage($rootPackage, realpath(__DIR__ . '/..'))
+                           ->directories()
         );
     }
 
+    /**
+     * @return array<string, mixed>
+     *
+     * @psalm-return array<string, array{0: array{
+     *  psr-0?: array<string, string|array<int, string>>,
+     *  psr-4?: array<string, string|array<int, string>>
+     * }, 1: array<int, string>}>
+     */
     public function expectedDirectories() : array
     {
         return [
@@ -138,20 +155,29 @@ final class PackageAutoloadTest extends TestCase
         ];
     }
 
-    /** @dataProvider expectedFiles */
+    /**
+     * @param array<string, mixed> $autoloadDefinition
+     * @param array<int, string>   $expectedFiles
+     *
+     * @dataProvider expectedFiles
+     */
     public function testFilesFromAutoloadDefinition(
         array $autoloadDefinition,
         array $expectedFiles
     ) : void {
         self::assertSame(
             $expectedFiles,
-            PackageAutoload
-                ::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
-                ->files()
+            PackageAutoload::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
+                           ->files()
         );
     }
 
-    /** @dataProvider expectedFiles */
+    /**
+     * @param array<string, mixed> $autoloadDefinition
+     * @param array<int, string>   $expectedFiles
+     *
+     * @dataProvider expectedFiles
+     */
     public function testFilesFromComposerRootPackage(
         array $autoloadDefinition,
         array $expectedFiles
@@ -164,12 +190,16 @@ final class PackageAutoloadTest extends TestCase
 
         self::assertSame(
             $expectedFiles,
-            PackageAutoload
-                ::fromComposerRootPackage($rootPackage, realpath(__DIR__ . '/..'))
-                ->files()
+            PackageAutoload::fromComposerRootPackage($rootPackage, realpath(__DIR__ . '/..'))
+                           ->files()
         );
     }
 
+    /**
+     * @return array<string, mixed>
+     *
+     * @psalm-return array<string, array{0: array{classmap?: array<int, string>}, 1: array<int, string>}>
+     */
     public function expectedFiles() : array
     {
         return [
@@ -200,22 +230,29 @@ final class PackageAutoloadTest extends TestCase
         ];
     }
 
-
-    /** @dataProvider expectedNamespaces */
+    /**
+     * @param array<string, mixed> $autoloadDefinition
+     * @param array<int, string>   $expectedNamespaces
+     *
+     * @dataProvider expectedNamespaces
+     */
     public function testNamespacesFromAutoloadDefinition(
         array $autoloadDefinition,
         array $expectedNamespaces
     ) : void {
         self::assertSame(
             $expectedNamespaces,
-            PackageAutoload
-                ::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
-                ->namespaces()
+            PackageAutoload::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
+                           ->namespaces()
         );
     }
 
-
-    /** @dataProvider expectedNamespaces */
+    /**
+     * @param array<string, mixed> $autoloadDefinition
+     * @param array<int, string>   $expectedNamespaces
+     *
+     * @dataProvider expectedNamespaces
+     */
     public function testNamespacesFromRootPackage(
         array $autoloadDefinition,
         array $expectedNamespaces
@@ -228,12 +265,19 @@ final class PackageAutoloadTest extends TestCase
 
         self::assertSame(
             $expectedNamespaces,
-            PackageAutoload
-                ::fromComposerRootPackage($rootPackage, realpath(__DIR__ . '/..'))
-                ->namespaces()
+            PackageAutoload::fromComposerRootPackage($rootPackage, realpath(__DIR__ . '/..'))
+                           ->namespaces()
         );
     }
 
+    /**
+     * @return array<string, mixed>
+     *
+     * @psalm-return array<string, array{0: array{
+     *  psr-0?: array<string, string|array<int, string>>,
+     *  psr-4?: array<string, string|array<int, string>>
+     * }, 1: array<int, string>}>
+     */
     public function expectedNamespaces() : array
     {
         return [
@@ -300,7 +344,7 @@ final class PackageAutoloadTest extends TestCase
                     'Non_Existing_',
                     'Another_Ns_',
                 ],
-            ]
+            ],
         ];
     }
 }

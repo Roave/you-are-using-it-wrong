@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Roave\YouAreUsingItWrong\Composer;
 
+use function array_keys;
+use function in_array;
+
 /** @internal this class is only for supporting internal usage of locker data */
 final class Package
 {
@@ -30,10 +33,10 @@ final class Package
      *
      * @psalm-param array{
      *   name: string,
-     *   require: null|array<string, string>,
-     *   autoload: null|array{
-     *    psr-4: null|array<string, string|array<int, string>>,
-     *    psr-0: null|array<string, string|array<int, string>>
+     *   require?: array<string, string>,
+     *   autoload?: array{
+     *    psr-4?: array<string, string|array<int, string>>,
+     *    psr-0?: array<string, string|array<int, string>>
      *   }
      *  } $packageDefinition
      */

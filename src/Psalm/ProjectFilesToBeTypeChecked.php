@@ -10,7 +10,8 @@ use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
 /** @internal this class is only for configuring psalm according to the defaults of this repository */
 final class ProjectFilesToBeTypeChecked extends ProjectFileFilter
 {
-    public function __construct($inclusive)
+    /** {@inheritDoc} */
+    public function __construct(bool $inclusive)
     {
         parent::__construct($inclusive);
     }

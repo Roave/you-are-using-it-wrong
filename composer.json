@@ -21,7 +21,8 @@
         "infection/infection":      "^0.12.2",
         "composer/composer":        "^1.8.5",
         "doctrine/coding-standard": "^6.0.0",
-        "symfony/process":          "^4.2.8"
+        "symfony/process":          "^4.2.8",
+        "psalm/plugin-phpunit": "^0.5.5"
     },
     "autoload": {
         "psr-4": {

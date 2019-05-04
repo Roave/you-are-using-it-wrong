@@ -9,10 +9,10 @@ use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks;
 
 /**
- * @covers \Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks
- *
  * @uses \Roave\YouAreUsingItWrong\Composer\Package
  * @uses \Roave\YouAreUsingItWrong\Composer\PackageAutoload
+ *
+ * @covers \Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks
  */
 final class PackagesRequiringStrictChecksTest extends TestCase
 {
@@ -32,9 +32,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                                 'Foo\\Baz\\' => ['bbb'],
                             ],
                         ],
-                        'require'  => [
-                            'roave/enforce-type-checks' => '1.2.3',
-                        ],
+                        'require'  => ['roave/enforce-type-checks' => '1.2.3'],
                     ],
                     [
                         'name'     => 'ignore/me',
@@ -43,9 +41,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                                 'Ignore\\Me\\' => ['ccc'],
                             ],
                         ],
-                        'require'  => [
-                            'something/else' => '4.5.6',
-                        ],
+                        'require'  => ['something/else' => '4.5.6'],
                     ],
                     [
                         'name'     => 'baz/tab',
@@ -54,9 +50,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                                 'Baz\\Tab\\' => ['ddd'],
                             ],
                         ],
-                        'require'  => [
-                            'roave/enforce-type-checks' => '4.5.6',
-                        ],
+                        'require'  => ['roave/enforce-type-checks' => '4.5.6'],
                     ],
                 ],
                 'packages-dev' => [
@@ -67,9 +61,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                                 'Taz\\Tar\\' => ['eee'],
                             ],
                         ],
-                        'require'  => [
-                            'roave/enforce-type-checks' => '7.8.9',
-                        ],
+                        'require'  => ['roave/enforce-type-checks' => '7.8.9'],
                     ],
                 ],
             ]);

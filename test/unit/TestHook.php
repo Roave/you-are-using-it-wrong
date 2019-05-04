@@ -6,6 +6,7 @@ namespace RoaveTest\YouAreUsingItWrong;
 
 use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Hook;
+use function array_keys;
 
 /** @covers \Roave\YouAreUsingItWrong\Hook */
 final class TestHook extends TestCase

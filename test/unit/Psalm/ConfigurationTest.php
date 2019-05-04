@@ -12,6 +12,7 @@ use Psalm\Issue\CodeIssue;
 use Psalm\Issue\FunctionIssue;
 use Psalm\Issue\MethodIssue;
 use Psalm\Issue\PropertyIssue;
+use ReflectionProperty;
 use Roave\YouAreUsingItWrong\Psalm\Configuration;
 
 /** @covers \Roave\YouAreUsingItWrong\Psalm\Configuration */
@@ -19,10 +20,10 @@ final class ConfigurationTest extends TestCase
 {
     public function testConfigurationDefaults() : void
     {
-        $reflectionFiles            = new \ReflectionProperty(Configuration::class, 'project_files');
-        $reflectionPhpstormGenerics = new \ReflectionProperty(Configuration::class, 'allow_phpstorm_generics');
-        $reflectionUseDocblockTypes = new \ReflectionProperty(Configuration::class, 'use_docblock_types');
-        $reflectionTotallyTyped     = new \ReflectionProperty(Configuration::class, 'totally_typed');
+        $reflectionFiles            = new ReflectionProperty(Configuration::class, 'project_files');
+        $reflectionPhpstormGenerics = new ReflectionProperty(Configuration::class, 'allow_phpstorm_generics');
+        $reflectionUseDocblockTypes = new ReflectionProperty(Configuration::class, 'use_docblock_types');
+        $reflectionTotallyTyped     = new ReflectionProperty(Configuration::class, 'totally_typed');
 
         $reflectionFiles->setAccessible(true);
         $reflectionPhpstormGenerics->setAccessible(true);
@@ -38,7 +39,9 @@ final class ConfigurationTest extends TestCase
         self::assertTrue($reflectionTotallyTyped->getValue($configuration));
     }
 
-    /** @dataProvider expectedReportingLevels */
+    /**
+     * @dataProvider expectedReportingLevels
+     */
     public function testCheckedNamespaces(
         CodeIssue $issue,
         string $expectedReportingLevel,
@@ -48,12 +51,16 @@ final class ConfigurationTest extends TestCase
 
         self::assertSame(
             $expectedReportingLevel,
-            Configuration
-                ::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles, ...$checkedNamespaces)
+            Configuration::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles, ...$checkedNamespaces)
                 ->getReportingLevelForIssue($issue)
         );
     }
 
+    /**
+     * @return array<string, array<int, CodeIssue|string>>
+     *
+     * @psalm-return array<string, array{0: CodeIssue, 1: string}>
+     */
     public function expectedReportingLevels() : array
     {
         $classIssue    = $this->createMock(ClassIssue::class);

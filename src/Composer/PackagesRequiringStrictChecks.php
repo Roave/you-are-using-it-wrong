@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Roave\YouAreUsingItWrong\Composer;
 
 use Composer\Package\Locker;
+use function array_filter;
+use function array_map;
+use function array_merge;
 
 /** @internal this class is only for supporting internal usage of locker data */
 final class PackagesRequiringStrictChecks
@@ -23,18 +26,18 @@ final class PackagesRequiringStrictChecks
          * @var array{
          *  packages: array<int, array{
          *   name: string,
-         *   require: null|array<string, string>,
-         *   autoload: null|array{
-         *    psr-4: null|array<string, string|array<int, string>>,
-         *    psr-0: null|array<string, string|array<int, string>>
+         *   require?: array<string, string>,
+         *   autoload?: array{
+         *    psr-4?: array<string, string|array<int, string>>,
+         *    psr-0?: array<string, string|array<int, string>>
          *   }
          *  }>,
-         *  packages-dev: null|array<int, array{
+         *  packages-dev?: array<int, array{
          *   name: string,
-         *   require: null|array<string, string>,
-         *   autoload: null|array{
-         *    psr-4: null|array<string, string|array<int, string>>,
-         *    psr-0: null|array<string, string|array<int, string>>
+         *   require?: array<string, string>,
+         *   autoload?: array{
+         *    psr-4?: array<string, string|array<int, string>>,
+         *    psr-0?: array<string, string|array<int, string>>
          *   }
          *  }>
          * } $lockData
@@ -43,7 +46,7 @@ final class PackagesRequiringStrictChecks
 
         return new self(...array_filter(
             array_map(
-                function (array $packageDefinition) use ($projectInstallationPath) : Package {
+                static function (array $packageDefinition) use ($projectInstallationPath) : Package {
                     return Package::fromPackageDefinition(
                         $packageDefinition,
                         $projectInstallationPath . '/vendor/' . $packageDefinition['name']

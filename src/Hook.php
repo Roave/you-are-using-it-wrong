@@ -7,24 +7,22 @@ namespace Roave\YouAreUsingItWrong;
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
-use Composer\Package\Locker;
-use Composer\Package\RootPackageInterface;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use PackageVersions\Versions;
-use Psalm\Config\ProjectFileFilter;
 use Psalm\Internal\Analyzer\ProjectAnalyzer;
 use Psalm\Internal\Provider\FileProvider;
 use Psalm\Internal\Provider\Providers;
 use Psalm\IssueBuffer;
-use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
-use Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks;
 use Roave\YouAreUsingItWrong\Composer\Project;
 use Roave\YouAreUsingItWrong\Psalm\Configuration;
 use Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked;
 use RuntimeException;
-use function array_merge;
+use function define;
+use function defined;
+use function getcwd;
+use function microtime;
 
 /** @internal this is a composer plugin: do not rely on it in your sources */
 final class Hook implements PluginInterface, EventSubscriberInterface
@@ -90,7 +88,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
             ->packagesRequiringStrictTypeChecks()
             ->namespacesForWhichUsagesAreToBeTypeChecked()
         );
-        $projectAnalyzer = new ProjectAnalyzer($config, new Providers(new FileProvider));
+        $projectAnalyzer = new ProjectAnalyzer($config, new Providers(new FileProvider()));
 
         $config->visitComposerAutoloadFiles($projectAnalyzer);
         $projectAnalyzer->check(__DIR__, false);
