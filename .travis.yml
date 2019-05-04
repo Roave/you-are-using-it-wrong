@@ -23,7 +23,7 @@ jobs:
 
     - stage: Mutation Tests
       php: '7.3'
-      script: vendor/bin/infection --min-msi=100 --min-covered-msi=100
+      script: vendor/bin/infection --min-msi=70 --min-covered-msi=100
 
 env:
   - DEPENDENCIES=""
