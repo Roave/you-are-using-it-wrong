@@ -72,6 +72,7 @@ final class ConfigurationTest extends TestCase
         $methodIssue   = $this->createMock(MethodIssue::class);
         $functionIssue = $this->createMock(FunctionIssue::class);
         $argumentIssue = $this->createMock(ArgumentIssue::class);
+        $genericIssue  = $this->createMock(CodeIssue::class);
 
         $classIssue->fq_classlike_name = 'Foo\\Bar\\Baz';
         $propertyIssue->property_id    = 'Foo\\Bar\\Baz$property';
@@ -201,6 +202,13 @@ final class ConfigurationTest extends TestCase
             'case-insensitive matching namespaces, argument issue' => [
                 $argumentIssue,
                 Configuration::REPORT_ERROR,
+                'AAA\\BBB',
+                'AAA\\BBB\\',
+                'foo\\',
+            ],
+            'generic issue type' => [
+                $genericIssue,
+                Configuration::REPORT_SUPPRESS,
                 'AAA\\BBB',
                 'AAA\\BBB\\',
                 'foo\\',
