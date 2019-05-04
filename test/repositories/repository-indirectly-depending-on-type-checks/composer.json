@@ -1,0 +1,11 @@
+{
+    "name": "test/repository-indirectly-depending-on-type-checks",
+    "require": {
+        "test/repository-depending-on-type-checks": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Test\\RepositoryIndirectlyDependingOnTypeChecks\\": "src"
+        }
+    }
+}

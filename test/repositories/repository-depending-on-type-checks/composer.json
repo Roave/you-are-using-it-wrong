@@ -1,0 +1,11 @@
+{
+    "name": "test/repository-depending-on-type-checks",
+    "require": {
+        "roave/enforce-type-checks": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Test\\RepositoryDependingOnTypeChecks\\": "src"
+        }
+    }
+}
