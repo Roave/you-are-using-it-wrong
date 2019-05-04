@@ -10,24 +10,6 @@ php:
   - '7.4snapshot'
   - 'nightly'
 
-jobs:
-  include:
-    - stage: Test
-      php: '7.3'
-      script: vendor/bin/phpunit --coverage-text
-
-    - stage: Static Analysis (src) with Psalm
-      php: '7.3'
-      script: vendor/bin/psalm
-
-    - stage: Coding Standards
-      php: '7.3'
-      script: vendor/bin/phpcs
-
-    - stage: Mutation Tests
-      php: '7.3'
-      script: vendor/bin/infection --min-msi=80 --min-covered-msi=100
-
 env:
   - DEPENDENCIES=""
   - DEPENDENCIES="--prefer-lowest --prefer-stable"
@@ -39,10 +21,10 @@ matrix:
 
 before_script:
   - git checkout -b built-ci-branch
-  - composer self-update
   - composer update --prefer-dist $DEPENDENCIES
 
 script:
-  - ./vendor/bin/phpunit --disallow-test-output --coverage-clover ./clover.xml
-  - if [[ $TRAVIS_PHP_VERSION = '7.3' && $DEPENDENCIES = '' ]]; then ./vendor/bin/infection; fi
-  - if [[ $TRAVIS_PHP_VERSION = '7.3' && $DEPENDENCIES = '' ]]; then ./vendor/bin/phpcs; fi
+  - vendor/bin/phpunit --coverage-text
+  - vendor/bin/psalm
+  - vendor/bin/phpcs
+  - vendor/bin/infection --min-msi=80 --min-covered-msi=100
