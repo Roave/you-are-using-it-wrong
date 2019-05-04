@@ -1,0 +1,44 @@
+{
+    "name": "roave/you-are-using-it-wrong",
+    "description": "Composer plugin enforcing strict type checks in downstream package dependants",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Pivetta",
+            "email": "ocramius@gmail.com"
+        }
+    ],
+    "require": {
+        "php":                       "^7.3.0",
+        "ext-json":                  "*",
+        "composer-plugin-api":       "^1.0.0",
+        "ocramius/package-versions": "^1.4.0",
+        "vimeo/psalm":               "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit":          "^8.0.0",
+        "infection/infection":      "^0.12.2",
+        "composer/composer":        "^1.8.5",
+        "doctrine/coding-standard": "^6.0.0",
+        "symfony/process":          "^4.2.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Roave\\YouAreUsingItWrong\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RoaveTest\\YouAreUsingItWrong\\": "test/unit",
+            "RoaveE2ETest\\YouAreUsingItWrong\\": "test/e2e"
+        }
+    },
+    "extra": {
+        "class": "Roave\\YouAreUsingItWrong\\Hook"
+    },
+    "scripts": {
+        "post-update-cmd":  "Roave\\YouAreUsingItWrong\\Hook::runTypeChecks",
+        "post-install-cmd": "Roave\\YouAreUsingItWrong\\Hook::runTypeChecks"
+    }
+}
