@@ -2,6 +2,9 @@ language: php
 
 sudo: false
 
+git:
+  depth: false
+
 php:
   - '7.3'
   - '7.4snapshot'
@@ -35,6 +38,7 @@ matrix:
   - php: 'nightly'
 
 before_script:
+  - git checkout -b built-ci-branch
   - composer self-update
   - composer update --prefer-dist $DEPENDENCIES
 
