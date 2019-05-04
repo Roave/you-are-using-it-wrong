@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RoaveTest\YouAreUsingItWrong\Psalm;
 
 use PHPUnit\Framework\TestCase;
+use Psalm\Config;
 use Psalm\Config\ProjectFileFilter;
 use Psalm\Issue\ArgumentIssue;
 use Psalm\Issue\ClassIssue;
@@ -24,11 +25,13 @@ final class ConfigurationTest extends TestCase
         $reflectionPhpstormGenerics = new ReflectionProperty(Configuration::class, 'allow_phpstorm_generics');
         $reflectionUseDocblockTypes = new ReflectionProperty(Configuration::class, 'use_docblock_types');
         $reflectionTotallyTyped     = new ReflectionProperty(Configuration::class, 'totally_typed');
+        $reflectionInstance         = new ReflectionProperty(Config::class, 'instance');
 
         $reflectionFiles->setAccessible(true);
         $reflectionPhpstormGenerics->setAccessible(true);
         $reflectionUseDocblockTypes->setAccessible(true);
         $reflectionTotallyTyped->setAccessible(true);
+        $reflectionInstance->setAccessible(true);
 
         $projectFiles  = $this->createMock(ProjectFileFilter::class);
         $configuration = Configuration::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles);
@@ -37,6 +40,7 @@ final class ConfigurationTest extends TestCase
         self::assertTrue($reflectionPhpstormGenerics->getValue($configuration));
         self::assertTrue($reflectionUseDocblockTypes->getValue($configuration));
         self::assertTrue($reflectionTotallyTyped->getValue($configuration));
+        self::assertSame($configuration, $reflectionInstance->getValue($configuration));
     }
 
     /**
