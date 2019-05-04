@@ -64,7 +64,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
         }
 
         if ($project->alreadyHasOwnPsalmConfiguration()) {
-            $io->write('<info>' . self::THIS_PACKAGE_NAME . ':</info> psalm.xml detected - skipping static analysis, up to project maintainer to run it...');
+            $io->write('<info>' . self::THIS_PACKAGE_NAME . ':</info> psalm.xml detected - assuming static analysis will run later; not running psalm now');
 
             return;
         }
