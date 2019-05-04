@@ -4,7 +4,7 @@
 [![Packagist](https://img.shields.io/packagist/v/roave/you-are-using-it-wrong.svg)](https://packagist.org/packages/roave/you-are-using-it-wrong)
 
 This package enforces type checks during composer installation in downstream
-consumers of your package.
+consumers of your package. This only applies to usages of classes, properties, methods and functions declared within packages that directly depend on *you-are-using-it-wrong*.  Issues that the static analyser finds that do not relate to these namespaces will not be reported.
 
 `roave/you-are-using-it-wrong` comes with a zero-configuration out-of-the-box
 setup.
