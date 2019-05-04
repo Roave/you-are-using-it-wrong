@@ -10,7 +10,11 @@ use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
 use Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked;
 use function realpath;
 
-/** @covers \Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked */
+/**
+ * @covers \Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked
+ *
+ * @uses \Roave\YouAreUsingItWrong\Composer\PackageAutoload
+ */
 final class ProjectFilesToBeTypeCheckedTest extends TestCase
 {
     public function testFilesToBeChecked() : void
