@@ -8,6 +8,7 @@ use Composer\Package\Locker;
 use Composer\Package\RootPackageInterface;
 use function array_filter;
 use function array_merge;
+use function file_exists;
 
 /** @internal this class is only for supporting internal usage of locker data */
 final class Project
@@ -23,14 +24,19 @@ final class Project
     /** @var bool */
     private $strictTypeChecksAreEnforcedByLocalInstallation;
 
+    /** @var string */
+    private $projectDirectory;
+
     private function __construct(
         PackageAutoload $rootPackageAutoload,
         PackagesRequiringStrictChecks $packagesRequiringStrictChecks,
-        bool $strictTypeChecksAreEnforcedByLocalInstallation
+        bool $strictTypeChecksAreEnforcedByLocalInstallation,
+        string $projectDirectory
     ) {
         $this->rootPackageAutoload                            = $rootPackageAutoload;
         $this->packagesRequiringStrictTypeChecks              = $packagesRequiringStrictChecks;
         $this->strictTypeChecksAreEnforcedByLocalInstallation = $strictTypeChecksAreEnforcedByLocalInstallation;
+        $this->projectDirectory                               = $projectDirectory;
     }
 
     public static function fromComposerInstallationContext(
@@ -49,7 +55,8 @@ final class Project
                 static function (array $package) : bool {
                     return $package['name'] === self::THIS_PACKAGE_NAME;
                 }
-            ) !== []
+            ) !== [],
+            $currentWorkingDirectory
         );
     }
 
@@ -66,5 +73,10 @@ final class Project
     public function strictTypeChecksAreEnforcedByLocalInstallation() : bool
     {
         return $this->strictTypeChecksAreEnforcedByLocalInstallation;
+    }
+
+    public function alreadyHasOwnPsalmConfiguration() : bool
+    {
+        return file_exists($this->projectDirectory . '/psalm.xml');
     }
 }

@@ -12,9 +12,9 @@ use Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks;
 use Roave\YouAreUsingItWrong\Composer\Project;
 
 /**
- * @uses \Roave\YouAreUsingItWrong\Composer\Package
- * @uses \Roave\YouAreUsingItWrong\Composer\PackageAutoload
- * @uses \Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks
+ * @uses   \Roave\YouAreUsingItWrong\Composer\Package
+ * @uses   \Roave\YouAreUsingItWrong\Composer\PackageAutoload
+ * @uses   \Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks
  *
  * @covers \Roave\YouAreUsingItWrong\Composer\Project
  */
@@ -97,6 +97,7 @@ final class ProjectTest extends TestCase
             $project->rootPackageAutoload()
         );
         self::assertFalse($project->strictTypeChecksAreEnforcedByLocalInstallation());
+        self::assertFalse($project->alreadyHasOwnPsalmConfiguration());
     }
 
     public function testPackageWithLocalPluginInstallation() : void
@@ -176,6 +177,29 @@ final class ProjectTest extends TestCase
                 __DIR__
             )
                    ->strictTypeChecksAreEnforcedByLocalInstallation()
+        );
+    }
+
+    public function testProjectWhichAlreadyHasAPsalmConfiguration() : void
+    {
+        $rootPackage = $this->createMock(RootPackageInterface::class);
+        $locker      = $this->createMock(Locker::class);
+
+        $locker
+            ->method('getLockData')
+            ->willReturn(['packages' => []]);
+
+        $rootPackage
+            ->method('getAutoload')
+            ->willReturn([]);
+
+        self::assertTrue(
+            Project::fromComposerInstallationContext(
+                $rootPackage,
+                $locker,
+                __DIR__ . '/../../..'
+            )
+                   ->alreadyHasOwnPsalmConfiguration()
         );
     }
 }

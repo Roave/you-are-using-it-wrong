@@ -11,9 +11,9 @@ use Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked;
 use function realpath;
 
 /**
- * @covers \Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked
- *
  * @uses \Roave\YouAreUsingItWrong\Composer\PackageAutoload
+ *
+ * @covers \Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked
  */
 final class ProjectFilesToBeTypeCheckedTest extends TestCase
 {
