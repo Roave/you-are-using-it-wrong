@@ -1,0 +1,26 @@
+language: php
+
+sudo: false
+
+php:
+  - '7.3'
+  - '7.4snapshot'
+  - 'nightly'
+
+env:
+  - DEPENDENCIES=""
+  - DEPENDENCIES="--prefer-lowest --prefer-stable"
+
+matrix:
+  allow_failures:
+  - php: '7.4snapshot'
+  - php: 'nightly'
+
+before_script:
+  - composer self-update
+  - composer update --prefer-dist $DEPENDENCIES
+
+script:
+  - ./vendor/bin/phpunit --disallow-test-output --coverage-clover ./clover.xml
+  - if [[ $TRAVIS_PHP_VERSION = '7.3' && $DEPENDENCIES = '' ]]; then ./vendor/bin/infection; fi
+  - if [[ $TRAVIS_PHP_VERSION = '7.3' && $DEPENDENCIES = '' ]]; then ./vendor/bin/phpcs; fi
