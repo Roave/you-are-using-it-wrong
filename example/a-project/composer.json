@@ -1,0 +1,24 @@
+{
+    "name": "a/project",
+    "description": "A project that depends on my/awesome-library, and has type-errors in it",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "The\\Project\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "my/awesome-library": "1.0.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../roave-you-are-using-it-wrong"
+        },
+        {
+            "type": "path",
+            "url": "../my-awesome-library"
+        }
+    ]
+}
