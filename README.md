@@ -61,7 +61,7 @@ Assuming you have a library with following `composer.json`:
 Given following `src/MyHelloWorld.php`:
 
 ```php
-<?php
+<?php declare(strict_types=1);
 
 namespace My\AwesomeLibrary;
 
@@ -90,7 +90,7 @@ Considering following downstream project:
 And following `src/MyExample.php`:
 
 ```php
-<?php
+<?php declare(strict_types=1);
 
 // notice the simple type error
 echo \My\AwesomeLibrary\MyHelloWorld::sayHello(123);
