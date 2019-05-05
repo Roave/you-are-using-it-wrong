@@ -5,6 +5,9 @@
             "src"
         ]
     },
+    "mutators": {
+        "@default": true
+    },
     "logs": {
         "text": "infection-log.txt"
     }
