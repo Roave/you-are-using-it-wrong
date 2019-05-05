@@ -5,10 +5,10 @@ set -euxo pipefail
 CURRENT_ROAVE_DEV_VERSION=$(git rev-parse --abbrev-ref HEAD)
 
 # The local version of the repository is not the stable/released one:
+git checkout -- my-awesome-library/composer.json
 sed -i s~@CURRENT_ROAVE_DEV_VERSION~dev-$CURRENT_ROAVE_DEV_VERSION~g my-awesome-library/composer.json
 
 # Composer cannot install a source package in itself, so we make a copy:
-git checkout -- my-awesome-library/composer.json
 rm -rf ./a-project/composer.lock
 rm -rf ./a-project/vendor
 rm -rf ./roave-you-are-using-it-wrong
