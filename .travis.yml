@@ -27,4 +27,4 @@ script:
   - vendor/bin/phpunit --coverage-text --coverage-xml=coverage/coverage-xml --log-junit=coverage/phpunit.junit.xml
   - vendor/bin/psalm
   - vendor/bin/phpcs
-  - vendor/bin/infection --min-msi=80 --min-covered-msi=100 --coverage=coverage
+  - vendor/bin/infection --min-msi=80 --min-covered-msi=100 --coverage=coverage --log-verbosity=none -s
