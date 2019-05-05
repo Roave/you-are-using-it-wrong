@@ -3,4 +3,4 @@
 .gitignore export-ignore
 .travis.yml export-ignore
 phpunit.xml.dist export-ignore
-infection.json.dist
+infection.json.dist export-ignore
