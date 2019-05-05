@@ -74,8 +74,13 @@ final class Hook implements PluginInterface, EventSubscriberInterface
 
     private static function analyseProject(Project $project) : void
     {
-        defined('PSALM_VERSION') || define('PSALM_VERSION', Versions::getVersion('vimeo/psalm'));
-        defined('PHP_PARSER_VERSION') || define('PHP_PARSER_VERSION', Versions::getVersion('nikic/php-parser'));
+        if (! defined('PSALM_VERSION')) {
+            define('PSALM_VERSION', Versions::getVersion('vimeo/psalm'));
+        }
+
+        if (! defined('PHP_PARSER_VERSION')) {
+            define('PHP_PARSER_VERSION', Versions::getVersion('nikic/php-parser'));
+        }
 
         // At this stage of the installation, project dependencies are not yet autoloadable
         require_once getcwd() . '/vendor/autoload.php';
