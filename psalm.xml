@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<psalm
+    xmlns="https://getpsalm.org/schema/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    name="Example Psalm config with recommended defaults"
+    useDocblockTypes="true"
+    totallyTyped="false"
+    allowPhpStormGenerics="true"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <directory name="test/e2e"/>
+        <directory name="test/unit"/>
+    </projectFiles>
+
+    <issueHandlers>
+        <PropertyNotSetInConstructor errorLevel="suppress"/>
+        <InternalClass errorLevel="suppress"/>
+        <InternalMethod errorLevel="suppress"/>
+        <UnresolvableInclude errorLevel="suppress"/>
+    </issueHandlers>
+
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    </plugins>
+</psalm>

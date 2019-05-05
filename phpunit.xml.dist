@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    bootstrap="./vendor/autoload.php"
+    colors="true"
+    verbose="true"
+    columns="max"
+    beStrictAboutCoversAnnotation="true"
+    beStrictAboutResourceUsageDuringSmallTests="true"
+    beStrictAboutChangesToGlobalState="true"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTodoAnnotatedTests="true"
+    executionOrder="random"
+>
+    <testsuites>
+        <testsuite name="Roave\YouAreUsingItWrong tests">
+            <directory>./test/unit</directory>
+        </testsuite>
+        <testsuite name="Roave\YouAreUsingItWrong e2e tests">
+            <directory>./test/e2e</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+</phpunit>
