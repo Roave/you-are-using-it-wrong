@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Roave\YouAreUsingItWrong\Composer;
 
+use Composer\IO\IOInterface;
 use Composer\Package\Locker;
 use function array_filter;
 use function array_map;
 use function array_merge;
+use function array_walk;
 
 /** @internal this class is only for supporting internal usage of locker data */
 final class PackagesRequiringStrictChecks
 {
+    private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
+
     /** @var Package[] */
     private $packages;
 
@@ -76,5 +80,36 @@ final class PackagesRequiringStrictChecks
                 ->autoload()
                 ->namespaces();
         }, $this->packages));
+    }
+
+    public function printPackagesToBeCheckedToComposerIo(IOInterface $io) : void
+    {
+        $io->write('<info>' . self::THIS_PACKAGE_NAME . ':</info> following package usages will be checked:');
+
+        array_walk(
+            $this->packages,
+            static function (Package $package) use ($io) : void {
+                self::printPackage($package, $io);
+            }
+        );
+    }
+
+    private static function printPackage(Package $package, IOInterface $io) : void
+    {
+        $io->write(' - ' . $package->name());
+
+        $namespaces = $package->autoload()->namespaces();
+
+        array_walk(
+            $namespaces,
+            static function (string $namespace) use ($io) : void {
+                self::printPackageNamespace($namespace, $io);
+            }
+        );
+    }
+
+    private static function printPackageNamespace(string $namespace, IOInterface $io) : void
+    {
+        $io->write(' - - ' . $namespace);
     }
 }

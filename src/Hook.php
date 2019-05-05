@@ -67,6 +67,10 @@ final class Hook implements PluginInterface, EventSubscriberInterface
 
         $io->write('<info>' . self::THIS_PACKAGE_NAME . ':</info> checking strictly type-checked packages...');
 
+        $project
+            ->packagesRequiringStrictTypeChecks()
+            ->printPackagesToBeCheckedToComposerIo($io);
+
         self::analyseProject($project);
 
         $io->write('<info>' . self::THIS_PACKAGE_NAME . ':</info> ... done checking strictly type-checked packages');
