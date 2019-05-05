@@ -4,10 +4,19 @@
 [![Packagist](https://img.shields.io/packagist/v/roave/you-are-using-it-wrong.svg)](https://packagist.org/packages/roave/you-are-using-it-wrong)
 
 This package enforces type checks during composer installation in downstream
-consumers of your package. This only applies to usages of classes, properties, methods and functions declared within packages that directly depend on *you-are-using-it-wrong*.  Issues that the static analyser finds that do not relate to these namespaces will not be reported.
+consumers of your package. This only applies to usages of classes, properties,
+methods and functions declared within packages that directly depend on
+*roave/you-are-using-it-wrong*.
+
+Issues that the static analyser finds that do not relate to these namespaces
+will not be reported.
 
 `roave/you-are-using-it-wrong` comes with a zero-configuration out-of-the-box
 setup.
+
+By default, it hooks into `composer install` and `composer update`, preventing
+a successful command execution if there are type errors in usages of protected
+namespaces. 
 
 The usage of this plugin is highly endorsed for authors of new PHP libraries
 who appreciate the advantages of static types.
@@ -41,7 +50,9 @@ downstream consumers of your code.
 
 ### Examples
 
-Assuming you have a library with following `composer.json`:
+You can experiment with the following example by running `cd examples && ./run-example.sh`.
+
+Given you are the author of `my/awesome-library`, which has following `composer.json`:
 
 ```json
 {
@@ -53,12 +64,12 @@ Assuming you have a library with following `composer.json`:
         }
     },
     "require": {
-        "roave/you-are-doing-it-wrong": "@STABLE"
+        "roave/you-are-doing-it-wrong": "^1.0.0"
     }
 }
 ```
 
-Given following `src/MyHelloWorld.php`:
+Given following `my/awesome-library/src/MyHelloWorld.php`:
 
 ```php
 <?php declare(strict_types=1);
@@ -67,53 +78,80 @@ namespace My\AwesomeLibrary;
 
 final class MyHelloWorld
 {
-    public static function sayHello(string $name) : string
+    /** @param array<string> $people */
+    public static function sayHello(array $people) : string
     {
-        return 'Hello ' . $name . '!';
+        return 'Hello ' . implode(', ', $people) . '!';
     }
 }
 ```
 
-Considering following downstream project:
+Given following downstream `a/project/composer.json` project that
+depends on your `my/awesome-library`:
 
 ```json
 {
     "name": "a/project",
+    "type": "project",
     "autoload": {
         "psr-4": {
             "The\\Project\\": "src"
         }
+    },
+    "require": {
+        "my/awesome-library": "^1.0.0"
     }
 }
 ```
 
-And following `src/MyExample.php`:
+And following `a/project/src/MyExample.php`:
 
 ```php
 <?php declare(strict_types=1);
 
 // notice the simple type error
-echo \My\AwesomeLibrary\MyHelloWorld::sayHello(123);
+echo \My\AwesomeLibrary\MyHelloWorld::sayHello([123, 456]);
 ```
 
-Then following command will fail with a type check error and description:
+Then `composer install` in said project will fail:
 
 ```sh
-composer require my/awesome-library:^1.0.0
+$ cd a/project
+$ composer install
+
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+  ... <snip>
+  - Installing roave/you-are-using-it-wrong (1.0.0): ...
+  - Installing my/awesome-library (1.0.0): ...
+  ... <snip>
+
+roave/you-are-using-it-wrong: checking strictly type-checked packages...
+Scanning files...
+Analyzing files...
+
+ERROR: InvalidScalarArgument - a-project/src/MyExample.php:4:48 
+  - Argument 1 of My\AwesomeLibrary\MyHelloWorld::sayhello expects array<array-key, string>,
+    array{0:int(123), 1:int(456)} provided
+echo \My\AwesomeLibrary\MyHelloWorld::sayHello([123, 456]);
+
+$ echo $?
+1
 ```
 
 ## Workarounds
 
 This package is designed to be quite invasive from a type-check perspective,
 but it will bail out of any checks if a [`psalm.xml`](https://psalm.dev/docs/configuration/)
-is detected in the root of your project. If that is the case, the tool assumes
-that the author of the project is already responsible for ensuring type-safety
-within their own domain, and therefore bails out without performing further
-checks.
+is detected in the root of the installation/project.
+If that is the case, the tool assumes that the author of the project is already
+responsible for ensuring type-safety within their own domain, and therefore
+bails out without performing further checks.
 
 As mentioned above, the design of the tool circles around raising awareness of
 static type usage in the PHP ecosystem, and therefore it will only give up if
-it is sure that you are already taking care of the matter on your own.
+it is sure that library consumers are already taking care of the matter on their
+own.
 
 ## Professional Support
 

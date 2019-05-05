@@ -1,7 +1,8 @@
 {
     "name": "a/project",
-    "description": "A project that depends on my/awesome-library, and has type-errors in it",
+    "type": "project",
     "license": "proprietary",
+    "description": "A project that depends on my/awesome-library, and has type-errors in it",
     "autoload": {
         "psr-4": {
             "The\\Project\\": "src"

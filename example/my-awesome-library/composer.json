@@ -1,8 +1,8 @@
 {
     "name": "my/awesome-library",
+    "type": "library",
     "license": "MIT",
     "description": "An example library, protected by roave/you-are-using-it-wrong",
-    "type": "library",
     "version": "1.0.0",
     "autoload": {
         "psr-4": {
