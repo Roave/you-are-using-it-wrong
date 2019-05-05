@@ -11,6 +11,7 @@
     beStrictAboutChangesToGlobalState="true"
     beStrictAboutOutputDuringTests="true"
     beStrictAboutTodoAnnotatedTests="true"
+    executionOrder="random"
 >
     <testsuites>
         <testsuite name="Roave\YouAreUsingItWrong tests">
