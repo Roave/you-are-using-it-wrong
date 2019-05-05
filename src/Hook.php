@@ -29,17 +29,13 @@ final class Hook implements PluginInterface, EventSubscriberInterface
 {
     private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public function activate(Composer $composer, IOInterface $io) : void
     {
         // Nothing to do here, as all features are provided through event listeners
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     public static function getSubscribedEvents() : array
     {
         return [
