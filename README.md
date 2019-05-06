@@ -38,7 +38,7 @@ In your library, add it to your
 `composer.json`:
 
 ```sh
-composer require roave/you-are-doing-it-wrong
+composer require roave/you-are-using-it-wrong
 ```
 
 No further changes are needed for this tool to start operating as per its
@@ -64,7 +64,7 @@ Given you are the author of `my/awesome-library`, which has following `composer.
         }
     },
     "require": {
-        "roave/you-are-doing-it-wrong": "^1.0.0"
+        "roave/you-are-using-it-wrong": "^1.0.0"
     }
 }
 ```
