@@ -20,7 +20,7 @@ final class Configuration extends PsalmConfig
     /** @var string[] */
     private $checkedNamespaces;
 
-    protected function __construct(ProjectFileFilter $files, string ...$checkedNamespaces)
+    private function __construct(ProjectFileFilter $files, string ...$checkedNamespaces)
     {
         parent::__construct();
 

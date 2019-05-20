@@ -68,7 +68,7 @@ final class PackageAutoload
                  * @return array<int, string>
                  */
                 static function ($paths) use ($prefixWithCurrentDir) : array {
-                    return array_map($prefixWithCurrentDir, array_map('strval', (array) $paths));
+                    return array_map($prefixWithCurrentDir, (array) $paths);
                 },
                 $autoloadDefinition['psr-4'] ?? []
             ),
@@ -79,7 +79,7 @@ final class PackageAutoload
                  * @return array<int, string>
                  */
                 static function ($paths) use ($prefixWithCurrentDir) : array {
-                    return array_map($prefixWithCurrentDir, array_map('strval', (array) $paths));
+                    return array_map($prefixWithCurrentDir, (array) $paths);
                 },
                 $autoloadDefinition['psr-0'] ?? []
             ),
