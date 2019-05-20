@@ -14,14 +14,14 @@
         "ext-json":                  "*",
         "composer-plugin-api":       "^1.0.0",
         "ocramius/package-versions": "^1.4.0",
-        "vimeo/psalm":               "dev-master"
+        "vimeo/psalm":               "^3.2.12"
     },
     "require-dev": {
         "composer/composer":        "^1.8.5",
         "doctrine/coding-standard": "^6.0.0",
-        "infection/infection":      "^0.12.2",
-        "phpunit/phpunit":          "^8.0.0",
-        "psalm/plugin-phpunit":     "^0.5.5",
+        "infection/infection":      "^0.13.0",
+        "phpunit/phpunit":          "^8.1.5",
+        "psalm/plugin-phpunit":     "^0.5.8",
         "symfony/process":          "^4.2.8"
     },
     "autoload": {
