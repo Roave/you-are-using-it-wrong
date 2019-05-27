@@ -180,7 +180,10 @@ final class ProjectTest extends TestCase
         );
     }
 
-    public function testProjectWhichAlreadyHasAPsalmConfiguration() : void
+    /**
+     * @dataProvider repositoryWithPsalmConfigurationProvider
+     */
+    public function testProjectWhichAlreadyHasAPsalmConfiguration(string $repositoryRoot) : void
     {
         $rootPackage = $this->createMock(RootPackageInterface::class);
         $locker      = $this->createMock(Locker::class);
@@ -197,9 +200,20 @@ final class ProjectTest extends TestCase
             Project::fromComposerInstallationContext(
                 $rootPackage,
                 $locker,
-                __DIR__ . '/../../..'
+                $repositoryRoot
             )
                    ->alreadyHasOwnPsalmConfiguration()
         );
+    }
+
+    /**
+     * @return array<string[]>
+     */
+    public function repositoryWithPsalmConfigurationProvider() : array
+    {
+        return [
+            [__DIR__ . '/../../..'],
+            [__DIR__ . '/../../repositories/repository-with-dist-config/'],
+        ];
     }
 }
