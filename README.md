@@ -142,7 +142,7 @@ $ echo $?
 ## Workarounds
 
 This package is designed to be quite invasive from a type-check perspective,
-but it will bail out of any checks if a [`psalm.xml`](https://psalm.dev/docs/configuration/)
+but it will bail out of any checks if a [`psalm configuration`](https://psalm.dev/docs/configuration/)
 is detected in the root of the installation/project.
 If that is the case, the tool assumes that the author of the project is already
 responsible for ensuring type-safety within their own domain, and therefore

@@ -77,6 +77,6 @@ final class Project
 
     public function alreadyHasOwnPsalmConfiguration() : bool
     {
-        return file_exists($this->projectDirectory . '/psalm.xml');
+        return file_exists($this->projectDirectory . '/psalm.xml') || file_exists($this->projectDirectory . '/psalm.xml.dist');
     }
 }
