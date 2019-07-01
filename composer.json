@@ -19,7 +19,7 @@
     "require-dev": {
         "composer/composer":        "^1.8.5",
         "doctrine/coding-standard": "^6.0.0",
-        "infection/infection":      "^0.13.1",
+        "infection/infection":      "^0.13.3",
         "phpunit/phpunit":          "^8.1.6",
         "psalm/plugin-phpunit":     "^0.6.0",
         "symfony/process":          "^4.3.0"
