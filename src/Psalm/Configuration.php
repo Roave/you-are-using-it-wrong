@@ -39,7 +39,7 @@ final class Configuration extends PsalmConfig
     }
 
     /** {@inheritDoc} */
-    public function getReportingLevelForIssue(CodeIssue $e, array $suppressed_issues = []) : string
+    public function getReportingLevelForIssue(CodeIssue $e) : string
     {
         if (($e instanceof ClassIssue && $this->identifierMatchesNamespace($e->fq_classlike_name))
             || ($e instanceof PropertyIssue && $this->identifierMatchesNamespace($e->property_id))
@@ -49,7 +49,7 @@ final class Configuration extends PsalmConfig
                 && $this->identifierMatchesNamespace((string) $e->function_id)
             )
         ) {
-            return parent::getReportingLevelForIssue($e, $suppressed_issues);
+            return parent::getReportingLevelForIssue($e);
         }
 
         return self::REPORT_SUPPRESS;

@@ -15,6 +15,7 @@ use Psalm\Internal\Analyzer\ProjectAnalyzer;
 use Psalm\Internal\Provider\FileProvider;
 use Psalm\Internal\Provider\Providers;
 use Psalm\IssueBuffer;
+use Psalm\Report\ReportOptions;
 use Roave\YouAreUsingItWrong\Composer\Project;
 use Roave\YouAreUsingItWrong\Psalm\Configuration;
 use Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked;
@@ -99,7 +100,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
             ->packagesRequiringStrictTypeChecks()
             ->namespacesForWhichUsagesAreToBeTypeChecked()
         );
-        $projectAnalyzer = new ProjectAnalyzer($config, new Providers(new FileProvider()));
+        $projectAnalyzer = new ProjectAnalyzer($config, new Providers(new FileProvider()), new ReportOptions());
 
         $config->visitComposerAutoloadFiles($projectAnalyzer);
         $projectAnalyzer->check(__DIR__, false);
