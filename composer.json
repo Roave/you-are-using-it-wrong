@@ -13,7 +13,7 @@
         "php":                       "^7.3.0",
         "ext-json":                  "*",
         "composer-plugin-api":       "^1.0.0",
-        "ocramius/package-versions": "^1.4.0",
+        "ocramius/package-versions": "^1.5.1",
         "vimeo/psalm":               "^3.5.1"
     },
     "require-dev": {
