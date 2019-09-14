@@ -20,8 +20,4 @@
         <InternalMethod errorLevel="suppress"/>
         <UnresolvableInclude errorLevel="suppress"/>
     </issueHandlers>
-
-    <plugins>
-        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
-    </plugins>
 </psalm>
