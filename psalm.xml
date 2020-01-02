@@ -19,5 +19,10 @@
         <InternalClass errorLevel="suppress"/>
         <InternalMethod errorLevel="suppress"/>
         <UnresolvableInclude errorLevel="suppress"/>
+        <ArgumentTypeCoercion>
+            <errorLevel type="info">
+                <file name="test/unit/Composer/PackageAutoloadTest.php" />
+            </errorLevel>
+        </ArgumentTypeCoercion>
     </issueHandlers>
 </psalm>
