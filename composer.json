@@ -17,7 +17,7 @@
         "vimeo/psalm":               "^3.5.3"
     },
     "require-dev": {
-        "composer/composer":        "^1.9.0",
+        "composer/composer":        "^1.9.2",
         "doctrine/coding-standard": "^6.0.0",
         "infection/infection":      "^0.14.1",
         "phpunit/phpunit":          "^8.3.5",
