@@ -69,7 +69,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString(' - - Test\\RepositoryDependingOnTypeChecks\\', $output);
         self::assertStringContainsString('1 errors', $output);
         self::assertStringContainsString(
-            'Argument 1 of Test\\RepositoryDependingOnTypeChecks\\SomeClass::amethod expects string, int(123) provided',
+            'Argument 1 of Test\\RepositoryDependingOnTypeChecks\\SomeClass::aMethod expects string, int(123) provided',
             $output
         );
 
@@ -94,7 +94,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString(' - - Test\\RepositoryDependingOnTypeChecks\\', $output);
         self::assertStringContainsString('1 errors', $output);
         self::assertStringContainsString(
-            'Argument 1 of Test\\RepositoryDependingOnTypeChecks\\SomeClass::amethod expects string, int(123) provided',
+            'Argument 1 of Test\\RepositoryDependingOnTypeChecks\\SomeClass::aMethod expects string, int(123) provided',
             $output
         );
 
@@ -124,7 +124,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString(' - - Test\\RepositoryDependingOnTypeChecks\\', $output);
         self::assertStringContainsString('1 errors', $output);
         self::assertStringContainsString(
-            'Argument 1 of Test\\RepositoryDependingOnTypeChecks\\SomeClass::amethod expects string, int(123) provided',
+            'Argument 1 of Test\\RepositoryDependingOnTypeChecks\\SomeClass::aMethod expects string, int(123) provided',
             $output
         );
 
