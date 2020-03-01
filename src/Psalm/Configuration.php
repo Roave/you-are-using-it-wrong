@@ -27,7 +27,6 @@ final class Configuration extends PsalmConfig
         $this->project_files           = $files;
         $this->allow_phpstorm_generics = true;
         $this->use_docblock_types      = true;
-        $this->totally_typed           = true;
         $this->checkedNamespaces       = $checkedNamespaces;
     }
 
