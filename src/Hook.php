@@ -22,6 +22,7 @@ use Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked;
 use RuntimeException;
 use function define;
 use function defined;
+use function file_exists;
 use function getcwd;
 use function microtime;
 
@@ -50,7 +51,14 @@ final class Hook implements PluginInterface, EventSubscriberInterface
      */
     public static function runTypeChecks(Event $composerEvent) : void
     {
-        $io       = $composerEvent->getIO();
+        $io = $composerEvent->getIO();
+
+        if (! file_exists(__DIR__)) {
+            $io->write('<info>' . self::THIS_PACKAGE_NAME . ':</info> Package not found (probably scheduled for removal) - skipping type checks...');
+
+            return;
+        }
+
         $composer = $composerEvent->getComposer();
         $project  = Project::fromComposerInstallationContext($composer->getPackage(), $composer->getLocker(), getcwd());
 
