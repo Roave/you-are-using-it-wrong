@@ -14,10 +14,7 @@ final class SimulatedInstallationTest extends TestCase
 
     protected function tearDown() : void
     {
-//        if ($this->repository !== null) {
-//            (new Process(['rm', '-r', $this->repository]))
-//                ->mustRun();
-//        }
+        (new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], __DIR__ . '/../..'))->mustRun();
 
         parent::tearDown();
     }
