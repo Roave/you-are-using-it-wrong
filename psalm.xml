@@ -15,6 +15,11 @@
     </projectFiles>
 
     <issueHandlers>
+        <DeprecatedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="PackageVersions\Versions"/>
+            </errorLevel>
+        </DeprecatedClass>
         <PropertyNotSetInConstructor errorLevel="suppress"/>
         <InternalClass errorLevel="suppress"/>
         <InternalMethod errorLevel="suppress"/>
