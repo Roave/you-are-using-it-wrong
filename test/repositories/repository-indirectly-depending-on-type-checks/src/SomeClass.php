@@ -6,7 +6,7 @@ namespace Test\RepositoryIndirectlyDependingOnTypeChecks;
 
 final class SomeClass
 {
-    public function aMethod(string $foo) : void
+    public function aMethod(string $foo): void
     {
     }
 }

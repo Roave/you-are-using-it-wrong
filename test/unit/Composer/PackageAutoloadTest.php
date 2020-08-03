@@ -7,6 +7,7 @@ namespace RoaveTest\YouAreUsingItWrong\Composer;
 use Composer\Package\RootPackageInterface;
 use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
+
 use function realpath;
 
 /** @covers \Roave\YouAreUsingItWrong\Composer\PackageAutoload */
@@ -21,7 +22,7 @@ final class PackageAutoloadTest extends TestCase
     public function testDirectoriesFromAutoloadDefinition(
         array $autoloadDefinition,
         array $expectedDirectories
-    ) : void {
+    ): void {
         self::assertSame(
             $expectedDirectories,
             PackageAutoload::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
@@ -38,7 +39,7 @@ final class PackageAutoloadTest extends TestCase
     public function testDirectoriesFromComposerRootPackage(
         array $autoloadDefinition,
         array $expectedDirectories
-    ) : void {
+    ): void {
         $rootPackage = $this->createMock(RootPackageInterface::class);
 
         $rootPackage
@@ -60,7 +61,7 @@ final class PackageAutoloadTest extends TestCase
      *  psr-4?: array<string, string|array<int, string>>
      * }, 1: array<int, string>}>
      */
-    public function expectedDirectories() : array
+    public function expectedDirectories(): array
     {
         return [
             'empty definition'                                    => [
@@ -164,7 +165,7 @@ final class PackageAutoloadTest extends TestCase
     public function testFilesFromAutoloadDefinition(
         array $autoloadDefinition,
         array $expectedFiles
-    ) : void {
+    ): void {
         self::assertSame(
             $expectedFiles,
             PackageAutoload::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
@@ -181,7 +182,7 @@ final class PackageAutoloadTest extends TestCase
     public function testFilesFromComposerRootPackage(
         array $autoloadDefinition,
         array $expectedFiles
-    ) : void {
+    ): void {
         $rootPackage = $this->createMock(RootPackageInterface::class);
 
         $rootPackage
@@ -203,7 +204,7 @@ final class PackageAutoloadTest extends TestCase
      *   files?: array<int, string>
      * }, 1: array<int, string>}>
      */
-    public function expectedFiles() : array
+    public function expectedFiles(): array
     {
         return [
             'empty definition'                          => [
@@ -256,7 +257,7 @@ final class PackageAutoloadTest extends TestCase
     public function testNamespacesFromAutoloadDefinition(
         array $autoloadDefinition,
         array $expectedNamespaces
-    ) : void {
+    ): void {
         self::assertSame(
             $expectedNamespaces,
             PackageAutoload::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
@@ -273,7 +274,7 @@ final class PackageAutoloadTest extends TestCase
     public function testNamespacesFromRootPackage(
         array $autoloadDefinition,
         array $expectedNamespaces
-    ) : void {
+    ): void {
         $rootPackage = $this->createMock(RootPackageInterface::class);
 
         $rootPackage
@@ -295,7 +296,7 @@ final class PackageAutoloadTest extends TestCase
      *  psr-4?: array<string, string|array<int, string>>
      * }, 1: array<int, string>}>
      */
-    public function expectedNamespaces() : array
+    public function expectedNamespaces(): array
     {
         return [
             'empty definition'                                    => [

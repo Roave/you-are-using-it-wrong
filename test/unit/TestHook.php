@@ -6,12 +6,13 @@ namespace RoaveTest\YouAreUsingItWrong;
 
 use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Hook;
+
 use function array_keys;
 
 /** @covers \Roave\YouAreUsingItWrong\Hook */
 final class TestHook extends TestCase
 {
-    public function testSubscribedEvents() : void
+    public function testSubscribedEvents(): void
     {
         $subscribers = Hook::getSubscribedEvents();
 

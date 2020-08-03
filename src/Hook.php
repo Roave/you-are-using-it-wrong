@@ -20,6 +20,7 @@ use Roave\YouAreUsingItWrong\Composer\Project;
 use Roave\YouAreUsingItWrong\Psalm\Configuration;
 use Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked;
 use RuntimeException;
+
 use function define;
 use function defined;
 use function getcwd;
@@ -31,13 +32,13 @@ final class Hook implements PluginInterface, EventSubscriberInterface
     private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
     /** {@inheritDoc} */
-    public function activate(Composer $composer, IOInterface $io) : void
+    public function activate(Composer $composer, IOInterface $io): void
     {
         // Nothing to do here, as all features are provided through event listeners
     }
 
     /** {@inheritDoc} */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [
             ScriptEvents::POST_INSTALL_CMD => 'runTypeChecks',
@@ -48,7 +49,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
     /**
      * @throws RuntimeException
      */
-    public static function runTypeChecks(Event $composerEvent) : void
+    public static function runTypeChecks(Event $composerEvent): void
     {
         $io       = $composerEvent->getIO();
         $composer = $composerEvent->getComposer();
@@ -77,7 +78,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
         $io->write('<info>' . self::THIS_PACKAGE_NAME . ':</info> ... done checking strictly type-checked packages');
     }
 
-    private static function analyseProject(Project $project) : void
+    private static function analyseProject(Project $project): void
     {
         if (! defined('PSALM_VERSION')) {
             define('PSALM_VERSION', Versions::getVersion('vimeo/psalm'));

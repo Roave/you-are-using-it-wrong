@@ -19,7 +19,7 @@ use Roave\YouAreUsingItWrong\Psalm\Configuration;
 /** @covers \Roave\YouAreUsingItWrong\Psalm\Configuration */
 final class ConfigurationTest extends TestCase
 {
-    public function testConfigurationDefaults() : void
+    public function testConfigurationDefaults(): void
     {
         $reflectionFiles            = new ReflectionProperty(Configuration::class, 'project_files');
         $reflectionPhpstormGenerics = new ReflectionProperty(Configuration::class, 'allow_phpstorm_generics');
@@ -50,7 +50,7 @@ final class ConfigurationTest extends TestCase
         CodeIssue $issue,
         string $expectedReportingLevel,
         string ...$checkedNamespaces
-    ) : void {
+    ): void {
         $projectFiles = $this->createMock(ProjectFileFilter::class);
 
         self::assertSame(
@@ -65,7 +65,7 @@ final class ConfigurationTest extends TestCase
      *
      * @psalm-return array<string, array{0: CodeIssue, 1: string}>
      */
-    public function expectedReportingLevels() : array
+    public function expectedReportingLevels(): array
     {
         $classIssue             = $this->createMock(ClassIssue::class);
         $propertyIssue          = $this->createMock(PropertyIssue::class);

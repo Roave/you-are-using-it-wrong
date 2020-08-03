@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
 use Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked;
+
 use function realpath;
 
 /**
@@ -17,7 +18,7 @@ use function realpath;
  */
 final class ProjectFilesToBeTypeCheckedTest extends TestCase
 {
-    public function testFilesToBeChecked() : void
+    public function testFilesToBeChecked(): void
     {
         $files = ProjectFilesToBeTypeChecked::fromAutoloadDefinitions(
             PackageAutoload::fromAutoloadDefinition(

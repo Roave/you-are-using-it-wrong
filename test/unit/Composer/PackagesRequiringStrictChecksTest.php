@@ -17,7 +17,7 @@ use Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks;
  */
 final class PackagesRequiringStrictChecksTest extends TestCase
 {
-    public function testNamespacesAndPackagesToBeTypeChecked() : void
+    public function testNamespacesAndPackagesToBeTypeChecked(): void
     {
         $locker = $this->createMock(Locker::class);
 
@@ -106,7 +106,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
         $packages->printPackagesToBeCheckedToComposerIo($io);
     }
 
-    public function testCanBeBuiltFromEmptyLockData() : void
+    public function testCanBeBuiltFromEmptyLockData(): void
     {
         $locker = $this->createMock(Locker::class);
 

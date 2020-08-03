@@ -20,7 +20,7 @@ use Roave\YouAreUsingItWrong\Composer\Project;
  */
 final class ProjectTest extends TestCase
 {
-    public function testPackageWithoutLocalPluginInstallation() : void
+    public function testPackageWithoutLocalPluginInstallation(): void
     {
         $rootPackage = $this->createMock(RootPackageInterface::class);
         $locker      = $this->createMock(Locker::class);
@@ -100,7 +100,7 @@ final class ProjectTest extends TestCase
         self::assertFalse($project->alreadyHasOwnPsalmConfiguration());
     }
 
-    public function testPackageWithLocalPluginInstallation() : void
+    public function testPackageWithLocalPluginInstallation(): void
     {
         $rootPackage = $this->createMock(RootPackageInterface::class);
         $locker      = $this->createMock(Locker::class);
@@ -139,7 +139,7 @@ final class ProjectTest extends TestCase
         );
     }
 
-    public function testPackageWithLocalPluginDevInstallation() : void
+    public function testPackageWithLocalPluginDevInstallation(): void
     {
         $rootPackage = $this->createMock(RootPackageInterface::class);
         $locker      = $this->createMock(Locker::class);
@@ -183,7 +183,7 @@ final class ProjectTest extends TestCase
     /**
      * @dataProvider repositoryWithPsalmConfigurationProvider
      */
-    public function testProjectWhichAlreadyHasAPsalmConfiguration(string $repositoryRoot) : void
+    public function testProjectWhichAlreadyHasAPsalmConfiguration(string $repositoryRoot): void
     {
         $rootPackage = $this->createMock(RootPackageInterface::class);
         $locker      = $this->createMock(Locker::class);
@@ -209,7 +209,7 @@ final class ProjectTest extends TestCase
     /**
      * @return array<string[]>
      */
-    public function repositoryWithPsalmConfigurationProvider() : array
+    public function repositoryWithPsalmConfigurationProvider(): array
     {
         return [
             [__DIR__ . '/../../..'],

@@ -12,14 +12,12 @@ final class Package
 {
     private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var PackageAutoload */
-    private $autoload;
+    private PackageAutoload $autoload;
 
     /** @var string[] */
-    private $dependencies;
+    private array $dependencies;
 
     private function __construct(string $name, PackageAutoload $autoload, string ...$dependencies)
     {
@@ -40,7 +38,7 @@ final class Package
      *   }
      *  } $packageDefinition
      */
-    public static function fromPackageDefinition(array $packageDefinition, string $installationPath) : self
+    public static function fromPackageDefinition(array $packageDefinition, string $installationPath): self
     {
         return new self(
             $packageDefinition['name'],
@@ -49,17 +47,17 @@ final class Package
         );
     }
 
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }
 
-    public function autoload() : PackageAutoload
+    public function autoload(): PackageAutoload
     {
         return $this->autoload;
     }
 
-    public function requiresStrictChecks() : bool
+    public function requiresStrictChecks(): bool
     {
         return in_array(self::THIS_PACKAGE_NAME, $this->dependencies, true);
     }
