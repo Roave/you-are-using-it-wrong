@@ -19,17 +19,19 @@ use Roave\YouAreUsingItWrong\Psalm\Configuration;
 /** @covers \Roave\YouAreUsingItWrong\Psalm\Configuration */
 final class ConfigurationTest extends TestCase
 {
-    public function testConfigurationDefaults() : void
+    public function testConfigurationDefaults(): void
     {
         $reflectionFiles            = new ReflectionProperty(Configuration::class, 'project_files');
         $reflectionPhpstormGenerics = new ReflectionProperty(Configuration::class, 'allow_phpstorm_generics');
         $reflectionUseDocblockTypes = new ReflectionProperty(Configuration::class, 'use_docblock_types');
         $reflectionInstance         = new ReflectionProperty(Config::class, 'instance');
+        $reflectionIncludeCollector = new ReflectionProperty(Config::class, 'include_collector');
 
         $reflectionFiles->setAccessible(true);
         $reflectionPhpstormGenerics->setAccessible(true);
         $reflectionUseDocblockTypes->setAccessible(true);
         $reflectionInstance->setAccessible(true);
+        $reflectionIncludeCollector->setAccessible(true);
 
         $projectFiles  = $this->createMock(ProjectFileFilter::class);
         $configuration = Configuration::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles);
@@ -38,6 +40,7 @@ final class ConfigurationTest extends TestCase
         self::assertTrue($reflectionPhpstormGenerics->getValue($configuration));
         self::assertTrue($reflectionUseDocblockTypes->getValue($configuration));
         self::assertSame($configuration, $reflectionInstance->getValue($configuration));
+        self::assertNotNull($reflectionIncludeCollector->getValue($configuration));
     }
 
     /**
@@ -47,7 +50,7 @@ final class ConfigurationTest extends TestCase
         CodeIssue $issue,
         string $expectedReportingLevel,
         string ...$checkedNamespaces
-    ) : void {
+    ): void {
         $projectFiles = $this->createMock(ProjectFileFilter::class);
 
         self::assertSame(
@@ -62,7 +65,7 @@ final class ConfigurationTest extends TestCase
      *
      * @psalm-return array<string, array{0: CodeIssue, 1: string}>
      */
-    public function expectedReportingLevels() : array
+    public function expectedReportingLevels(): array
     {
         $classIssue             = $this->createMock(ClassIssue::class);
         $propertyIssue          = $this->createMock(PropertyIssue::class);

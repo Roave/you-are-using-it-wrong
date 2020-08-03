@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace RoaveE2ETest\YouAreUsingItWrong;
 
 use Symfony\Component\Process\Process;
-use const JSON_PRETTY_PRINT;
+
 use function array_filter;
 use function array_map;
 use function array_merge;
@@ -19,13 +19,15 @@ use function sys_get_temp_dir;
 use function tempnam;
 use function unlink;
 
+use const JSON_PRETTY_PRINT;
+
 final class GenerateRepository
 {
     private function __construct()
     {
     }
 
-    public static function generateRepository(string ...$dependencies) : string
+    public static function generateRepository(string ...$dependencies): string
     {
         $installationTargetPath = tempnam(sys_get_temp_dir(), 'test-installation-');
 
@@ -47,7 +49,7 @@ final class GenerateRepository
                     ],
                     'require'           => array_merge(
                         ['roave/you-are-using-it-wrong' => 'dev-' . $currentGitVersion],
-                        ...array_map(static function (string $dependency) use ($currentGitVersion) : array {
+                        ...array_map(static function (string $dependency) use ($currentGitVersion): array {
                             return [$dependency => 'dev-' . $currentGitVersion];
                         }, $dependencies)
                     ),
@@ -57,7 +59,7 @@ final class GenerateRepository
                         // [['packagist.org' => false]],
                         [],
                         array_map(
-                            static function (string $path) : array {
+                            static function (string $path): array {
                                 return [
                                     'type' => 'path',
                                     'url'  => $path,
@@ -66,7 +68,7 @@ final class GenerateRepository
                             array_merge(
                                 array_filter(
                                     array_map(
-                                        static function (string $path) : string {
+                                        static function (string $path): string {
                                             return (string) realpath($path);
                                         },
                                         glob(__DIR__ . '/../../vendor/*/*')

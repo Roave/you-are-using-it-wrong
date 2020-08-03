@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Roave\YouAreUsingItWrong\Composer;
 
 use Composer\Package\RootPackageInterface;
+
 use function array_filter;
 use function array_keys;
 use function array_map;
@@ -15,16 +16,16 @@ use function array_values;
 final class PackageAutoload
 {
     /** @var array<string, array<int, string>> */
-    private $psr4;
+    private array $psr4;
 
     /** @var array<string, array<int, string>> */
-    private $psr0;
+    private array $psr0;
 
     /** @var array<int, string> */
-    private $classMap;
+    private array $classMap;
 
     /** @var array<int, string> */
-    private $files;
+    private array $files;
 
     /**
      * @param array<string, array<int, string>> $psr4
@@ -54,9 +55,9 @@ final class PackageAutoload
      *   classmap?: array<int, string>
      * } $autoloadDefinition
      */
-    public static function fromAutoloadDefinition(array $autoloadDefinition, string $packageDirectory) : self
+    public static function fromAutoloadDefinition(array $autoloadDefinition, string $packageDirectory): self
     {
-        $prefixWithCurrentDir = static function (string $path) use ($packageDirectory) : string {
+        $prefixWithCurrentDir = static function (string $path) use ($packageDirectory): string {
             return $packageDirectory . '/' . $path;
         };
 
@@ -67,7 +68,7 @@ final class PackageAutoload
                  *
                  * @return array<int, string>
                  */
-                static function ($paths) use ($prefixWithCurrentDir) : array {
+                static function ($paths) use ($prefixWithCurrentDir): array {
                     return array_map($prefixWithCurrentDir, (array) $paths);
                 },
                 $autoloadDefinition['psr-4'] ?? []
@@ -78,7 +79,7 @@ final class PackageAutoload
                  *
                  * @return array<int, string>
                  */
-                static function ($paths) use ($prefixWithCurrentDir) : array {
+                static function ($paths) use ($prefixWithCurrentDir): array {
                     return array_map($prefixWithCurrentDir, (array) $paths);
                 },
                 $autoloadDefinition['psr-0'] ?? []
@@ -88,7 +89,7 @@ final class PackageAutoload
         );
     }
 
-    public static function fromComposerRootPackage(RootPackageInterface $package, string $projectDirectory) : self
+    public static function fromComposerRootPackage(RootPackageInterface $package, string $projectDirectory): self
     {
         /**
          * @psalm-var array{
@@ -104,7 +105,7 @@ final class PackageAutoload
     }
 
     /** @return array<int, string> */
-    public function directories() : array
+    public function directories(): array
     {
         return array_filter(array_map('realpath', array_merge(
             [],
@@ -115,7 +116,7 @@ final class PackageAutoload
     }
 
     /** @return array<int, string> */
-    public function files() : array
+    public function files(): array
     {
         return array_filter(array_map('realpath', array_merge(
             [],
@@ -125,7 +126,7 @@ final class PackageAutoload
     }
 
     /** @return array<int, string> */
-    public function namespaces() : array
+    public function namespaces(): array
     {
         return array_merge(array_keys($this->psr4), array_keys($this->psr0));
     }

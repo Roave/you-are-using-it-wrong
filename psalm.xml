@@ -15,12 +15,21 @@
     </projectFiles>
 
     <issueHandlers>
+        <DeprecatedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="PackageVersions\Versions"/>
+            </errorLevel>
+        </DeprecatedClass>
         <PropertyNotSetInConstructor errorLevel="suppress"/>
         <InternalClass errorLevel="suppress"/>
         <InternalMethod errorLevel="suppress"/>
-        <UnresolvableInclude errorLevel="suppress"/>
+        <UnresolvableInclude>
+            <errorLevel type="suppress">
+                <file name="src/Hook.php"/>
+            </errorLevel>
+        </UnresolvableInclude>
         <ArgumentTypeCoercion>
-            <errorLevel type="info">
+            <errorLevel type="suppress">
                 <file name="test/unit/Composer/PackageAutoloadTest.php" />
             </errorLevel>
         </ArgumentTypeCoercion>

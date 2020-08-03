@@ -1,14 +1,15 @@
 {
-    "timeout": 10,
     "source": {
         "directories": [
             "src"
         ]
     },
-    "mutators": {
-        "@default": true
-    },
     "logs": {
-        "text": "infection-log.txt"
-    }
+        "text": "php://stderr",
+        "badge": {
+            "branch": "master"
+        }
+    },
+    "minMsi": 84,
+    "minCoveredMsi": 100
 }

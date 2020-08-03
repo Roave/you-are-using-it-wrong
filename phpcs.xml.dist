@@ -14,5 +14,8 @@
     <file>src</file>
     <file>test</file>
 
-    <rule ref="Doctrine"/>
+    <rule ref="Doctrine">
+        <!-- properties in psalm config do not use camel-case naming -->
+        <exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps"/>
+    </rule>
 </ruleset>

@@ -16,7 +16,7 @@ final class ProjectFilesToBeTypeChecked extends ProjectFileFilter
         parent::__construct($inclusive);
     }
 
-    public static function fromAutoloadDefinitions(PackageAutoload $autoload) : self
+    public static function fromAutoloadDefinitions(PackageAutoload $autoload): self
     {
         $instance = new self(true);
 

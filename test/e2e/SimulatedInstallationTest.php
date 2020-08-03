@@ -9,17 +9,16 @@ use Symfony\Component\Process\Process;
 
 final class SimulatedInstallationTest extends TestCase
 {
-    /** @var string|null */
-    private $repository;
+    private ?string $repository = null;
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         (new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], __DIR__ . '/../..'))->mustRun();
 
         parent::tearDown();
     }
 
-    public function testRepositoryWithoutIssues() : void
+    public function testRepositoryWithoutIssues(): void
     {
         $this->repository = GenerateRepository::generateRepository();
 
@@ -34,7 +33,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString('done checking strictly type-checked packages', $output);
     }
 
-    public function testRepositoryWithDependenciesNotDependingOnStrictTypeChecksWillNotHaveIssuesRaised() : void
+    public function testRepositoryWithDependenciesNotDependingOnStrictTypeChecksWillNotHaveIssuesRaised(): void
     {
         $this->repository = GenerateRepository::generateRepository('test/repository-not-depending-on-type-checks');
 
@@ -49,7 +48,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString('done checking strictly type-checked packages', $output);
     }
 
-    public function testRepositoryReportsIssuesWhenDependingOnPackageThatEnforcesStrictTypeChecks() : void
+    public function testRepositoryReportsIssuesWhenDependingOnPackageThatEnforcesStrictTypeChecks(): void
     {
         $this->repository = GenerateRepository::generateRepository('test/repository-depending-on-type-checks');
 
@@ -74,7 +73,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringNotContainsString('done checking strictly type-checked packages', $output);
     }
 
-    public function testRepositoryReportsIssuesWhenDependingIndirectlyOnPackageThatEnforcesStrictTypeChecks() : void
+    public function testRepositoryReportsIssuesWhenDependingIndirectlyOnPackageThatEnforcesStrictTypeChecks(): void
     {
         $this->repository = GenerateRepository::generateRepository('test/repository-indirectly-depending-on-type-checks');
 
@@ -99,7 +98,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringNotContainsString('done checking strictly type-checked packages', $output);
     }
 
-    public function testRepositoryOnlyReportsIssuesOnDependencyUsagesThatEnforceStrictTypeChecks() : void
+    public function testRepositoryOnlyReportsIssuesOnDependencyUsagesThatEnforceStrictTypeChecks(): void
     {
         $this->repository = GenerateRepository::generateRepository(
             'test/empty-repository',

@@ -7,6 +7,7 @@ namespace RoaveTest\YouAreUsingItWrong\Composer;
 use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Composer\Package;
 use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
+
 use function array_combine;
 
 /**
@@ -22,7 +23,7 @@ final class PackageTest extends TestCase
     public function testRequiresStrictChecks(
         bool $expected,
         string ...$dependencies
-    ) : void {
+    ): void {
         self::assertSame(
             $expected,
             Package::fromPackageDefinition(
@@ -41,7 +42,7 @@ final class PackageTest extends TestCase
      *
      * @psalm-return array<int, array{0: bool, 1: string, 2?: string}>
      */
-    public function dependencyCombinationsThatRequireStrictChecks() : array
+    public function dependencyCombinationsThatRequireStrictChecks(): array
     {
         return [
             [false, 'aaa/bbb'],
@@ -51,7 +52,7 @@ final class PackageTest extends TestCase
         ];
     }
 
-    public function testName() : void
+    public function testName(): void
     {
         self::assertSame(
             'foo/bar',
@@ -63,7 +64,7 @@ final class PackageTest extends TestCase
         );
     }
 
-    public function testAutoload() : void
+    public function testAutoload(): void
     {
         self::assertEquals(
             PackageAutoload::fromAutoloadDefinition(

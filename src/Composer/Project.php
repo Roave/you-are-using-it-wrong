@@ -6,6 +6,7 @@ namespace Roave\YouAreUsingItWrong\Composer;
 
 use Composer\Package\Locker;
 use Composer\Package\RootPackageInterface;
+
 use function array_filter;
 use function array_merge;
 use function file_exists;
@@ -15,17 +16,13 @@ final class Project
 {
     private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
-    /** @var PackageAutoload */
-    private $rootPackageAutoload;
+    private PackageAutoload $rootPackageAutoload;
 
-    /** @var PackagesRequiringStrictChecks */
-    private $packagesRequiringStrictTypeChecks;
+    private PackagesRequiringStrictChecks $packagesRequiringStrictTypeChecks;
 
-    /** @var bool */
-    private $strictTypeChecksAreEnforcedByLocalInstallation;
+    private bool $strictTypeChecksAreEnforcedByLocalInstallation;
 
-    /** @var string */
-    private $projectDirectory;
+    private string $projectDirectory;
 
     private function __construct(
         PackageAutoload $rootPackageAutoload,
@@ -43,7 +40,7 @@ final class Project
         RootPackageInterface $rootPackage,
         Locker $locker,
         string $currentWorkingDirectory
-    ) : self {
+    ): self {
         /** @psalm-var array{packages: array<int, array{name: string}>, packages-dev?: array<int, array{name: string}>} $lockData */
         $lockData = $locker->getLockData();
 
@@ -52,7 +49,7 @@ final class Project
             PackagesRequiringStrictChecks::fromComposerLocker($locker, $currentWorkingDirectory),
             array_filter(
                 array_merge($lockData['packages'], $lockData['packages-dev'] ?? []),
-                static function (array $package) : bool {
+                static function (array $package): bool {
                     return $package['name'] === self::THIS_PACKAGE_NAME;
                 }
             ) !== [],
@@ -60,22 +57,22 @@ final class Project
         );
     }
 
-    public function rootPackageAutoload() : PackageAutoload
+    public function rootPackageAutoload(): PackageAutoload
     {
         return $this->rootPackageAutoload;
     }
 
-    public function packagesRequiringStrictTypeChecks() : PackagesRequiringStrictChecks
+    public function packagesRequiringStrictTypeChecks(): PackagesRequiringStrictChecks
     {
         return $this->packagesRequiringStrictTypeChecks;
     }
 
-    public function strictTypeChecksAreEnforcedByLocalInstallation() : bool
+    public function strictTypeChecksAreEnforcedByLocalInstallation(): bool
     {
         return $this->strictTypeChecksAreEnforcedByLocalInstallation;
     }
 
-    public function alreadyHasOwnPsalmConfiguration() : bool
+    public function alreadyHasOwnPsalmConfiguration(): bool
     {
         return file_exists($this->projectDirectory . '/psalm.xml') || file_exists($this->projectDirectory . '/psalm.xml.dist');
     }
