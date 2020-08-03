@@ -6,6 +6,7 @@ namespace Roave\YouAreUsingItWrong\Psalm;
 
 use Psalm\Config as PsalmConfig;
 use Psalm\Config\ProjectFileFilter;
+use Psalm\Internal\IncludeCollector;
 use Psalm\Issue\ArgumentIssue;
 use Psalm\Issue\ClassIssue;
 use Psalm\Issue\CodeIssue;
@@ -28,6 +29,8 @@ final class Configuration extends PsalmConfig
         $this->allow_phpstorm_generics = true;
         $this->use_docblock_types      = true;
         $this->checkedNamespaces       = $checkedNamespaces;
+
+        $this->setIncludeCollector(new IncludeCollector());
     }
 
     public static function forStrictlyCheckedNamespacesAndProjectFiles(

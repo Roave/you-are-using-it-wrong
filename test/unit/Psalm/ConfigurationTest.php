@@ -25,11 +25,13 @@ final class ConfigurationTest extends TestCase
         $reflectionPhpstormGenerics = new ReflectionProperty(Configuration::class, 'allow_phpstorm_generics');
         $reflectionUseDocblockTypes = new ReflectionProperty(Configuration::class, 'use_docblock_types');
         $reflectionInstance         = new ReflectionProperty(Config::class, 'instance');
+        $reflectionIncludeCollector = new ReflectionProperty(Config::class, 'include_collector');
 
         $reflectionFiles->setAccessible(true);
         $reflectionPhpstormGenerics->setAccessible(true);
         $reflectionUseDocblockTypes->setAccessible(true);
         $reflectionInstance->setAccessible(true);
+        $reflectionIncludeCollector->setAccessible(true);
 
         $projectFiles  = $this->createMock(ProjectFileFilter::class);
         $configuration = Configuration::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles);
@@ -38,6 +40,7 @@ final class ConfigurationTest extends TestCase
         self::assertTrue($reflectionPhpstormGenerics->getValue($configuration));
         self::assertTrue($reflectionUseDocblockTypes->getValue($configuration));
         self::assertSame($configuration, $reflectionInstance->getValue($configuration));
+        self::assertNotNull($reflectionIncludeCollector->getValue($configuration));
     }
 
     /**

@@ -90,9 +90,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
         // At this stage of the installation, project dependencies are not yet autoloadable
         require_once getcwd() . '/vendor/autoload.php';
 
-        $startTime = microtime(true);
-        // @TODO in project with psalm config, skip analysis: these people know what they are doing.
-
+        $startTime       = microtime(true);
         $files           = ProjectFilesToBeTypeChecked::fromAutoloadDefinitions($project->rootPackageAutoload());
         $config          = Configuration::forStrictlyCheckedNamespacesAndProjectFiles(
             $files,
