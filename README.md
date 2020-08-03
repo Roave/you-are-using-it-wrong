@@ -1,6 +1,7 @@
 # roave/you-are-using-it-wrong
 
-[![Build Status](https://travis-ci.org/Roave/you-are-using-it-wrong.svg?branch=master)](https://travis-ci.org/Roave/you-are-using-it-wrong)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Froave%2Fyou-are-using-it-wrong)](https://dashboard.stryker-mutator.io/reports/github.com/roave/you-are-using-it-wrong/master)
+[![Type Coverage](https://shepherd.dev/github/roave/you-are-using-it-wrong/coverage.svg)](https://shepherd.dev/github/roave/you-are-using-it-wrong)
 [![Packagist](https://img.shields.io/packagist/v/roave/you-are-using-it-wrong.svg)](https://packagist.org/packages/roave/you-are-using-it-wrong)
 
 This package enforces type checks during composer installation in downstream
