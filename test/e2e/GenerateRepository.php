@@ -33,7 +33,7 @@ final class GenerateRepository
         mkdir($installationTargetPath);
         mkdir($installationTargetPath . '/src');
 
-        $currentGitVersion = (new Process(['git', 'rev-parse', 'HEAD'], __DIR__ . '/../..'))
+        $currentGitVersion = (new Process(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], __DIR__ . '/../..'))
             ->mustRun()
             ->getOutput();
 

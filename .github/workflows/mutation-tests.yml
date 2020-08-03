@@ -54,6 +54,9 @@ jobs:
         if: ${{ matrix.dependencies == 'locked' }}
         run: "composer install --no-interaction --no-progress --no-suggest"
 
+      - name: "Checkout current HEAD as a named ref"
+        run: "git checkout -b ci-run-branch"
+
       - name: "Infection"
         run: "vendor/bin/infection"
         env:
