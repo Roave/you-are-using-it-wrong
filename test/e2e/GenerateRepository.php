@@ -103,7 +103,7 @@ final class GenerateRepository
         return $installationTargetPath;
     }
 
-    private static function addVersionToDependencies($vendorDependencies): void
+    private static function addVersionToDependencies(array $vendorDependencies): void
     {
         $composerLockPath = __DIR__ . '/../../composer.lock';
 
@@ -119,7 +119,11 @@ final class GenerateRepository
                 static function (object $package) use ($packageName) {
                     return $package->name === $packageName;
                 }
-            ))[0];
+            ));
+
+            if (isset($packageLockData[0])) {
+                $packageLockData = $packageLockData[0];
+            }
 
             $packageLockVersion = $packageLockData->version;
 
