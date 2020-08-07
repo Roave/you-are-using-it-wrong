@@ -39,6 +39,18 @@ final class GenerateRepository
             ->mustRun()
             ->getOutput();
 
+        $vendorDependencies = array_filter(
+            array_map(
+                static function (string $path): string {
+                    return (string) realpath($path);
+                },
+                glob(__DIR__ . '/../../vendor/*/*')
+            ),
+            'is_dir'
+        );
+
+        self::addVersionToDependencies($vendorDependencies);
+
         file_put_contents(
             $installationTargetPath . '/composer.json',
             json_encode(
@@ -66,15 +78,7 @@ final class GenerateRepository
                                 ];
                             },
                             array_merge(
-                                array_filter(
-                                    array_map(
-                                        static function (string $path): string {
-                                            return (string) realpath($path);
-                                        },
-                                        glob(__DIR__ . '/../../vendor/*/*')
-                                    ),
-                                    'is_dir'
-                                ),
+                                $vendorDependencies,
                                 [
                                     (string) realpath(__DIR__ . '/../..'),
                                     (string) realpath(__DIR__ . '/../repositories/empty-repository'),
@@ -97,5 +101,31 @@ final class GenerateRepository
         );
 
         return $installationTargetPath;
+    }
+
+    private static function addVersionToDependencies($vendorDependencies): void
+    {
+        $composerLockPath = __DIR__ . '/../../composer.lock';
+
+        $composerLockPackages = json_decode(file_get_contents($composerLockPath))->packages;
+
+        foreach ($vendorDependencies as $dependencyPath) {
+            $composerJson = json_decode(file_get_contents($dependencyPath . '/composer.json'));
+
+            $packageName = $composerJson->name;
+
+            $packageLockData = array_values(array_filter(
+                $composerLockPackages,
+                static function (object $package) use ($packageName) {
+                    return $package->name === $packageName;
+                }
+            ))[0];
+
+            $packageLockVersion = $packageLockData->version;
+
+            $composerJson->version = $packageLockVersion;
+
+            file_put_contents($dependencyPath . '/composer.json', json_encode($composerJson));
+        }
     }
 }
