@@ -9,9 +9,12 @@ use Symfony\Component\Process\Process;
 use function array_filter;
 use function array_map;
 use function array_merge;
+use function array_values;
 use function copy;
+use function file_get_contents;
 use function file_put_contents;
 use function glob;
+use function json_decode;
 use function json_encode;
 use function mkdir;
 use function realpath;
@@ -103,6 +106,9 @@ final class GenerateRepository
         return $installationTargetPath;
     }
 
+    /**
+     * @param array $vendorDependencies
+     */
     private static function addVersionToDependencies(array $vendorDependencies): void
     {
         $composerLockPath = __DIR__ . '/../../composer.lock';
