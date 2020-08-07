@@ -107,4 +107,14 @@ final class Hook implements PluginInterface, EventSubscriberInterface
         // NOTE: this calls exit(1) on failed checks - currently not a problem, but it may become one
         IssueBuffer::finish($projectAnalyzer, true, $startTime);
     }
+
+    public function deactivate(Composer $composer, IOInterface $io): void
+    {
+        // Nothing to do here, as all features are provided through event listeners
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io): void
+    {
+        // Nothing to do here, as all features are provided through event listeners
+    }
 }
