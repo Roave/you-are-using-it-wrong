@@ -127,15 +127,13 @@ final class GenerateRepository
                 }
             ));
 
-            if (isset($packageLockData[0])) {
+            if (isset($packageLockData[0], $packageLockData[0]->version)) {
                 $packageLockData = $packageLockData[0];
+
+                $composerJson->version = $packageLockData->version;
+
+                file_put_contents($dependencyPath . '/composer.json', json_encode($composerJson));
             }
-
-            $packageLockVersion = $packageLockData->version;
-
-            $composerJson->version = $packageLockVersion;
-
-            file_put_contents($dependencyPath . '/composer.json', json_encode($composerJson));
         }
     }
 }
