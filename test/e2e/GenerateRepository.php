@@ -107,7 +107,7 @@ final class GenerateRepository
     }
 
     /**
-     * @param array $vendorDependencies
+     * @param string[] $vendorDependencies
      */
     private static function addVersionToDependencies(array $vendorDependencies): void
     {
@@ -127,13 +127,15 @@ final class GenerateRepository
                 }
             ));
 
-            if (isset($packageLockData[0], $packageLockData[0]->version)) {
-                $packageLockData = $packageLockData[0];
-
-                $composerJson->version = $packageLockData->version;
-
-                file_put_contents($dependencyPath . '/composer.json', json_encode($composerJson));
+            if (! isset($packageLockData[0], $packageLockData[0]->version)) {
+                continue;
             }
+
+            $packageLockData = $packageLockData[0];
+
+            $composerJson->version = $packageLockData->version;
+
+            file_put_contents($dependencyPath . '/composer.json', json_encode($composerJson));
         }
     }
 }
