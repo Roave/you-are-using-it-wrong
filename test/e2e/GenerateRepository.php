@@ -52,6 +52,10 @@ final class GenerateRepository
             'is_dir'
         );
 
+        /** this is used to add the `version` field with the correct value to the dependencies present in the
+         * `vendor` folder, such as `psalm` and `package-versions`. This ensures that `composer` is able to detect the
+         * correct version of the package during an `install`.
+         */
         self::addVersionToDependencies($vendorDependencies);
 
         file_put_contents(
