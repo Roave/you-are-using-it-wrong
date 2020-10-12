@@ -9,9 +9,12 @@ use Symfony\Component\Process\Process;
 use function array_filter;
 use function array_map;
 use function array_merge;
+use function array_values;
 use function copy;
+use function file_get_contents;
 use function file_put_contents;
 use function glob;
+use function json_decode;
 use function json_encode;
 use function mkdir;
 use function realpath;
@@ -38,6 +41,22 @@ final class GenerateRepository
         $currentGitVersion = (new Process(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], __DIR__ . '/../..'))
             ->mustRun()
             ->getOutput();
+
+        $vendorDependencies = array_filter(
+            array_map(
+                static function (string $path): string {
+                    return (string) realpath($path);
+                },
+                glob(__DIR__ . '/../../vendor/*/*')
+            ),
+            'is_dir'
+        );
+
+        /** this is used to add the `version` field with the correct value to the dependencies present in the
+         * `vendor` folder, such as `psalm` and `package-versions`. This ensures that `composer` is able to detect the
+         * correct version of the package during an `install`.
+         */
+        self::addVersionToDependencies($vendorDependencies);
 
         file_put_contents(
             $installationTargetPath . '/composer.json',
@@ -66,15 +85,7 @@ final class GenerateRepository
                                 ];
                             },
                             array_merge(
-                                array_filter(
-                                    array_map(
-                                        static function (string $path): string {
-                                            return (string) realpath($path);
-                                        },
-                                        glob(__DIR__ . '/../../vendor/*/*')
-                                    ),
-                                    'is_dir'
-                                ),
+                                $vendorDependencies,
                                 [
                                     (string) realpath(__DIR__ . '/../..'),
                                     (string) realpath(__DIR__ . '/../repositories/empty-repository'),
@@ -97,5 +108,38 @@ final class GenerateRepository
         );
 
         return $installationTargetPath;
+    }
+
+    /**
+     * @param string[] $vendorDependencies
+     */
+    private static function addVersionToDependencies(array $vendorDependencies): void
+    {
+        $composerLockPath = __DIR__ . '/../../composer.lock';
+
+        $composerLockPackages = json_decode(file_get_contents($composerLockPath))->packages;
+
+        foreach ($vendorDependencies as $dependencyPath) {
+            $composerJson = json_decode(file_get_contents($dependencyPath . '/composer.json'));
+
+            $packageName = $composerJson->name;
+
+            $packageLockData = array_values(array_filter(
+                $composerLockPackages,
+                static function (object $package) use ($packageName) {
+                    return $package->name === $packageName;
+                }
+            ));
+
+            if (! isset($packageLockData[0], $packageLockData[0]->version)) {
+                continue;
+            }
+
+            $packageLockData = $packageLockData[0];
+
+            $composerJson->version = $packageLockData->version;
+
+            file_put_contents($dependencyPath . '/composer.json', json_encode($composerJson));
+        }
     }
 }
