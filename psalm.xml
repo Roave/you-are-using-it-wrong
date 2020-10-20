@@ -33,5 +33,15 @@
                 <file name="test/unit/Composer/PackageAutoloadTest.php" />
             </errorLevel>
         </ArgumentTypeCoercion>
+        <OverriddenMethodAccess>
+            <errorLevel type="suppress">
+                <file name="src/Psalm/Configuration.php"/>
+            </errorLevel>
+        </OverriddenMethodAccess>
+        <ConstructorSignatureMismatch>
+            <errorLevel type="suppress">
+                <file name="src/Psalm/Configuration.php"/>
+            </errorLevel>
+        </ConstructorSignatureMismatch>
     </issueHandlers>
 </psalm>
