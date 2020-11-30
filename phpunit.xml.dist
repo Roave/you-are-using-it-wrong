@@ -13,6 +13,11 @@
     beStrictAboutTodoAnnotatedTests="true"
     executionOrder="random"
 >
+    <coverage>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </coverage>
     <testsuites>
         <testsuite name="Roave\YouAreUsingItWrong tests">
             <directory>./test/unit</directory>
@@ -21,9 +26,4 @@
             <directory>./test/e2e</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
 </phpunit>
