@@ -13,7 +13,7 @@ final class SimulatedInstallationTest extends TestCase
 
     protected function tearDown(): void
     {
-        (new Process([__DIR__ . '/../../vendor/bin/composer', 'install', '--ignore-platform-req=php'], __DIR__ . '/../..'))->mustRun();
+        (new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], __DIR__ . '/../..'))->mustRun();
 
         parent::tearDown();
     }
@@ -22,7 +22,7 @@ final class SimulatedInstallationTest extends TestCase
     {
         $this->repository = GenerateRepository::generateRepository();
 
-        $command = (new Process([__DIR__ . '/../../vendor/bin/composer', 'install', '--ignore-platform-req=php'], $this->repository))
+        $command = (new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], $this->repository))
             ->mustRun();
 
         $output = $command->getOutput();
@@ -37,7 +37,7 @@ final class SimulatedInstallationTest extends TestCase
     {
         $this->repository = GenerateRepository::generateRepository('test/repository-not-depending-on-type-checks');
 
-        $command = (new Process([__DIR__ . '/../../vendor/bin/composer', 'install', '--ignore-platform-req=php'], $this->repository))
+        $command = (new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], $this->repository))
             ->mustRun();
 
         $output = $command->getOutput();
@@ -52,7 +52,7 @@ final class SimulatedInstallationTest extends TestCase
     {
         $this->repository = GenerateRepository::generateRepository('test/repository-depending-on-type-checks');
 
-        $command = new Process([__DIR__ . '/../../vendor/bin/composer', 'install', '--ignore-platform-req=php'], $this->repository);
+        $command = new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], $this->repository);
 
         $command->run();
 
@@ -77,7 +77,7 @@ final class SimulatedInstallationTest extends TestCase
     {
         $this->repository = GenerateRepository::generateRepository('test/repository-indirectly-depending-on-type-checks');
 
-        $command = new Process([__DIR__ . '/../../vendor/bin/composer', 'install', '--ignore-platform-req=php'], $this->repository);
+        $command = new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], $this->repository);
 
         $command->run();
 
@@ -107,7 +107,7 @@ final class SimulatedInstallationTest extends TestCase
             'test/repository-not-depending-on-type-checks',
         );
 
-        $command = new Process([__DIR__ . '/../../vendor/bin/composer', 'install', '--ignore-platform-req=php'], $this->repository);
+        $command = new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], $this->repository);
 
         $command->run();
 
