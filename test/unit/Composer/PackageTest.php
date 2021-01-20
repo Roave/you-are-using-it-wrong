@@ -8,8 +8,6 @@ use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Composer\Package;
 use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
 
-use function array_combine;
-
 /**
  * @uses \Roave\YouAreUsingItWrong\Composer\PackageAutoload
  *
@@ -19,17 +17,18 @@ final class PackageTest extends TestCase
 {
     /**
      * @dataProvider dependencyCombinationsThatRequireStrictChecks
+     * @psalm-param array<non-empty-string, non-empty-string> $dependencies
      */
     public function testRequiresStrictChecks(
         bool $expected,
-        string ...$dependencies
+        array $dependencies
     ): void {
         self::assertSame(
             $expected,
             Package::fromPackageDefinition(
                 [
                     'name'    => 'foo/bar',
-                    'require' => array_combine($dependencies, $dependencies),
+                    'require' => $dependencies,
                 ],
                 __DIR__
             )
@@ -40,16 +39,39 @@ final class PackageTest extends TestCase
     /**
      * @return array<int, bool|string>
      *
-     * @psalm-return array<int, array{0: bool, 1: string, 2?: string}>
+     * @psalm-return array<int, array{bool, array<non-empty-string, non-empty-string>}>
      */
     public function dependencyCombinationsThatRequireStrictChecks(): array
     {
         return [
-            [false, 'aaa/bbb'],
-            [true, 'roave/you-are-using-it-wrong'],
-            [true, 'aaa/bbb', 'roave/you-are-using-it-wrong'],
-            [false, 'roave/potato'],
+            [
+                false,
+                ['aaa/bbb' => '1.2.3'],
+            ],
+            [
+                true,
+                ['roave/you-are-using-it-wrong' => '4.5.6'],
+            ],
+            [
+                true,
+                [
+                    'aaa/bbb' => '1.2.3',
+                    'roave/you-are-using-it-wrong' => '4.5.6',
+                ],
+            ],
+            [
+                false,
+                ['roave/potato' => '7.8.9'],
+            ],
         ];
+    }
+
+    public function testWillNotRequiresStrictChecksIfNoDependenciesAreSet(): void
+    {
+        self::assertFalse(
+            Package::fromPackageDefinition(['name' => 'foo/bar'], __DIR__)
+                ->requiresStrictChecks()
+        );
     }
 
     public function testName(): void
