@@ -20,6 +20,7 @@ use function mkdir;
 use function realpath;
 use function sys_get_temp_dir;
 use function tempnam;
+use function trim;
 use function unlink;
 
 use const JSON_PRETTY_PRINT;
@@ -38,9 +39,11 @@ final class GenerateRepository
         mkdir($installationTargetPath);
         mkdir($installationTargetPath . '/src');
 
-        $currentGitVersion = (new Process(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], __DIR__ . '/../..'))
+        $currentGitVersion = trim(
+            (new Process(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], __DIR__ . '/../..'))
             ->mustRun()
-            ->getOutput();
+            ->getOutput()
+        );
 
         $vendorDependencies = array_filter(
             array_map(
@@ -67,9 +70,9 @@ final class GenerateRepository
                         'psr-4' => ['Project\\' => './src'],
                     ],
                     'require'           => array_merge(
-                        ['roave/you-are-using-it-wrong' => 'dev-' . $currentGitVersion],
+                        ['roave/you-are-using-it-wrong' => $currentGitVersion . '-dev'],
                         ...array_map(static function (string $dependency) use ($currentGitVersion): array {
-                            return [$dependency => 'dev-' . $currentGitVersion];
+                            return [$dependency => $currentGitVersion . '-dev'];
                         }, $dependencies)
                     ),
                     'repositories'      => array_merge(
