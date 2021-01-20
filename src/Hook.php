@@ -102,7 +102,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
         $projectAnalyzer = new ProjectAnalyzer($config, new Providers(new FileProvider()), new ReportOptions());
 
         $config->visitComposerAutoloadFiles($projectAnalyzer);
-        $projectAnalyzer->check(__DIR__, false);
+        $projectAnalyzer->check(__DIR__);
 
         // NOTE: this calls exit(1) on failed checks - currently not a problem, but it may become one
         IssueBuffer::finish($projectAnalyzer, true, $startTime);
