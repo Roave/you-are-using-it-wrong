@@ -56,7 +56,7 @@ final class SimulatedInstallationTest extends TestCase
 
         $command->run();
 
-        self::assertSame(1, $command->getExitCode());
+        self::assertGreaterThan(0, $command->getExitCode());
 
         $output = $command->getOutput();
 
@@ -81,7 +81,7 @@ final class SimulatedInstallationTest extends TestCase
 
         $command->run();
 
-        self::assertSame(1, $command->getExitCode());
+        self::assertGreaterThan(0, $command->getExitCode());
 
         $output = $command->getOutput();
 
@@ -111,7 +111,7 @@ final class SimulatedInstallationTest extends TestCase
 
         $command->run();
 
-        self::assertSame(1, $command->getExitCode());
+        self::assertGreaterThan(0, $command->getExitCode());
 
         $output = $command->getOutput();
 
