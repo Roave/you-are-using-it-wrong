@@ -64,8 +64,8 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString(' - test/repository-depending-on-type-checks', $output);
         self::assertStringContainsString(' - - Test\\RepositoryDependingOnTypeChecks\\', $output);
         self::assertStringContainsString('1 errors', $output);
-        self::assertStringContainsString(
-            'Argument 1 of Test\\RepositoryDependingOnTypeChecks\\SomeClass::aMethod expects string, int(123) provided',
+        self::assertMatchesRegularExpression(
+            '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, (int\(123\)|123) provided@',
             $output
         );
 
@@ -89,8 +89,8 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString(' - test/repository-depending-on-type-checks', $output);
         self::assertStringContainsString(' - - Test\\RepositoryDependingOnTypeChecks\\', $output);
         self::assertStringContainsString('1 errors', $output);
-        self::assertStringContainsString(
-            'Argument 1 of Test\\RepositoryDependingOnTypeChecks\\SomeClass::aMethod expects string, int(123) provided',
+        self::assertMatchesRegularExpression(
+            '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, (int\(123\)|123) provided@',
             $output
         );
 
@@ -119,8 +119,8 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString(' - test/repository-depending-on-type-checks', $output);
         self::assertStringContainsString(' - - Test\\RepositoryDependingOnTypeChecks\\', $output);
         self::assertStringContainsString('1 errors', $output);
-        self::assertStringContainsString(
-            'Argument 1 of Test\\RepositoryDependingOnTypeChecks\\SomeClass::aMethod expects string, int(123) provided',
+        self::assertMatchesRegularExpression(
+            '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, (int\(123\)|123) provided@',
             $output
         );
 
