@@ -16,6 +16,9 @@
         "ocramius/package-versions": "^2.3.0",
         "vimeo/psalm":               "^4.4.1"
     },
+    "conflict": {
+        "vimeo/psalm": "4.6.3"
+    },
     "require-dev": {
         "composer/composer":        "^2.0.9",
         "doctrine/coding-standard": "^8.2.0",
