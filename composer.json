@@ -23,7 +23,7 @@
         "composer/composer":        "^2.0.13",
         "doctrine/coding-standard": "^8.2.0",
         "infection/infection":      "^0.20.2",
-        "phpunit/phpunit":          "^9.5.3",
+        "phpunit/phpunit":          "^9.5.4",
         "symfony/process":          "^5.2.1"
     },
     "autoload": {
