@@ -24,7 +24,7 @@
         "doctrine/coding-standard": "^8.2.0",
         "infection/infection":      "^0.20.2",
         "phpunit/phpunit":          "^9.5.6",
-        "symfony/process":          "^5.3.2"
+        "symfony/process":          "^5.3.4"
     },
     "autoload": {
         "psr-4": {
