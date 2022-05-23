@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php":                       "~8.0.0",
+        "php":                       "~8.0.0 || ~8.1.0",
         "ext-json":                  "*",
         "composer-plugin-api":       "^2.0.0",
         "ocramius/package-versions": "^2.3.0",
@@ -43,5 +43,11 @@
     "scripts": {
         "post-update-cmd":  "Roave\\YouAreUsingItWrong\\Hook::runTypeChecks",
         "post-install-cmd": "Roave\\YouAreUsingItWrong\\Hook::runTypeChecks"
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }
