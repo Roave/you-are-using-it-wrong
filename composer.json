@@ -37,6 +37,15 @@
             "RoaveE2ETest\\YouAreUsingItWrong\\": "test/e2e"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": false,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "platform": {
+            "php": "8.0.99"
+        }
+    },
     "extra": {
         "class": "Roave\\YouAreUsingItWrong\\Hook"
     },
