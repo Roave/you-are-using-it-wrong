@@ -36,7 +36,7 @@ final class Configuration extends PsalmConfig
 
     public static function forStrictlyCheckedNamespacesAndProjectFiles(
         ProjectFileFilter $projectFileFilter,
-        string ...$namespaces
+        string ...$namespaces,
     ): self {
         return new self($projectFileFilter, ...$namespaces);
     }

@@ -16,12 +16,13 @@ use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
 final class PackageTest extends TestCase
 {
     /**
-     * @dataProvider dependencyCombinationsThatRequireStrictChecks
      * @psalm-param array<non-empty-string, non-empty-string> $dependencies
+     *
+     * @dataProvider dependencyCombinationsThatRequireStrictChecks
      */
     public function testRequiresStrictChecks(
         bool $expected,
-        array $dependencies
+        array $dependencies,
     ): void {
         self::assertSame(
             $expected,
@@ -30,15 +31,14 @@ final class PackageTest extends TestCase
                     'name'    => 'foo/bar',
                     'require' => $dependencies,
                 ],
-                __DIR__
+                __DIR__,
             )
-                   ->requiresStrictChecks()
+                   ->requiresStrictChecks(),
         );
     }
 
     /**
      * @return array<int, bool|string>
-     *
      * @psalm-return array<int, array{bool, array<non-empty-string, non-empty-string>}>
      */
     public function dependencyCombinationsThatRequireStrictChecks(): array
@@ -70,7 +70,7 @@ final class PackageTest extends TestCase
     {
         self::assertFalse(
             Package::fromPackageDefinition(['name' => 'foo/bar'], __DIR__)
-                ->requiresStrictChecks()
+                ->requiresStrictChecks(),
         );
     }
 
@@ -80,9 +80,9 @@ final class PackageTest extends TestCase
             'foo/bar',
             Package::fromPackageDefinition(
                 ['name' => 'foo/bar'],
-                __DIR__
+                __DIR__,
             )
-                   ->name()
+                   ->name(),
         );
     }
 
@@ -93,7 +93,7 @@ final class PackageTest extends TestCase
                 [
                     'psr-0' => ['Foo_' => 'bar'],
                 ],
-                __DIR__
+                __DIR__,
             ),
             Package::fromPackageDefinition(
                 [
@@ -102,9 +102,9 @@ final class PackageTest extends TestCase
                         'psr-0' => ['Foo_' => 'bar'],
                     ],
                 ],
-                __DIR__
+                __DIR__,
             )
-                   ->autoload()
+                   ->autoload(),
         );
     }
 }

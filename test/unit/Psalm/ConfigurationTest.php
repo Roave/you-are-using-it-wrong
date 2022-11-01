@@ -43,26 +43,23 @@ final class ConfigurationTest extends TestCase
         self::assertNotNull($reflectionIncludeCollector->getValue($configuration));
     }
 
-    /**
-     * @dataProvider expectedReportingLevels
-     */
+    /** @dataProvider expectedReportingLevels */
     public function testCheckedNamespaces(
         CodeIssue $issue,
         string $expectedReportingLevel,
-        string ...$checkedNamespaces
+        string ...$checkedNamespaces,
     ): void {
         $projectFiles = $this->createMock(ProjectFileFilter::class);
 
         self::assertSame(
             $expectedReportingLevel,
             Configuration::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles, ...$checkedNamespaces)
-                         ->getReportingLevelForIssue($issue)
+                         ->getReportingLevelForIssue($issue),
         );
     }
 
     /**
      * @return array<string, array<int, CodeIssue|string>>
-     *
      * @psalm-return array<string, array{0: CodeIssue, 1: string}>
      */
     public function expectedReportingLevels(): array

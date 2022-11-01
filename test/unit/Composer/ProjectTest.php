@@ -80,21 +80,21 @@ final class ProjectTest extends TestCase
         $project = Project::fromComposerInstallationContext(
             $rootPackage,
             $locker,
-            __DIR__
+            __DIR__,
         );
 
         self::assertEquals(
             PackagesRequiringStrictChecks::fromComposerLocker($locker, __DIR__),
-            $project->packagesRequiringStrictTypeChecks()
+            $project->packagesRequiringStrictTypeChecks(),
         );
         self::assertEquals(
             PackageAutoload::fromAutoloadDefinition(
                 [
                     'psr-0' => ['Foo_' => 'bar'],
                 ],
-                __DIR__
+                __DIR__,
             ),
-            $project->rootPackageAutoload()
+            $project->rootPackageAutoload(),
         );
         self::assertFalse($project->strictTypeChecksAreEnforcedByLocalInstallation());
         self::assertFalse($project->alreadyHasOwnPsalmConfiguration());
@@ -133,9 +133,9 @@ final class ProjectTest extends TestCase
             Project::fromComposerInstallationContext(
                 $rootPackage,
                 $locker,
-                __DIR__
+                __DIR__,
             )
-                   ->strictTypeChecksAreEnforcedByLocalInstallation()
+                   ->strictTypeChecksAreEnforcedByLocalInstallation(),
         );
     }
 
@@ -174,15 +174,13 @@ final class ProjectTest extends TestCase
             Project::fromComposerInstallationContext(
                 $rootPackage,
                 $locker,
-                __DIR__
+                __DIR__,
             )
-                   ->strictTypeChecksAreEnforcedByLocalInstallation()
+                   ->strictTypeChecksAreEnforcedByLocalInstallation(),
         );
     }
 
-    /**
-     * @dataProvider repositoryWithPsalmConfigurationProvider
-     */
+    /** @dataProvider repositoryWithPsalmConfigurationProvider */
     public function testProjectWhichAlreadyHasAPsalmConfiguration(string $repositoryRoot): void
     {
         $rootPackage = $this->createMock(RootPackageInterface::class);
@@ -200,15 +198,13 @@ final class ProjectTest extends TestCase
             Project::fromComposerInstallationContext(
                 $rootPackage,
                 $locker,
-                $repositoryRoot
+                $repositoryRoot,
             )
-                   ->alreadyHasOwnPsalmConfiguration()
+                   ->alreadyHasOwnPsalmConfiguration(),
         );
     }
 
-    /**
-     * @return array<string[]>
-     */
+    /** @return array<string[]> */
     public function repositoryWithPsalmConfigurationProvider(): array
     {
         return [

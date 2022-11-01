@@ -21,12 +21,12 @@ final class PackageAutoloadTest extends TestCase
      */
     public function testDirectoriesFromAutoloadDefinition(
         array $autoloadDefinition,
-        array $expectedDirectories
+        array $expectedDirectories,
     ): void {
         self::assertSame(
             $expectedDirectories,
             PackageAutoload::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
-                           ->directories()
+                           ->directories(),
         );
     }
 
@@ -38,7 +38,7 @@ final class PackageAutoloadTest extends TestCase
      */
     public function testDirectoriesFromComposerRootPackage(
         array $autoloadDefinition,
-        array $expectedDirectories
+        array $expectedDirectories,
     ): void {
         $rootPackage = $this->createMock(RootPackageInterface::class);
 
@@ -49,13 +49,12 @@ final class PackageAutoloadTest extends TestCase
         self::assertSame(
             $expectedDirectories,
             PackageAutoload::fromComposerRootPackage($rootPackage, realpath(__DIR__ . '/..'))
-                           ->directories()
+                           ->directories(),
         );
     }
 
     /**
      * @return array<string, mixed>
-     *
      * @psalm-return array<string, array{0: array{
      *  psr-0?: array<string, string|array<int, string>>,
      *  psr-4?: array<string, string|array<int, string>>
@@ -164,12 +163,12 @@ final class PackageAutoloadTest extends TestCase
      */
     public function testFilesFromAutoloadDefinition(
         array $autoloadDefinition,
-        array $expectedFiles
+        array $expectedFiles,
     ): void {
         self::assertSame(
             $expectedFiles,
             PackageAutoload::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
-                           ->files()
+                           ->files(),
         );
     }
 
@@ -181,7 +180,7 @@ final class PackageAutoloadTest extends TestCase
      */
     public function testFilesFromComposerRootPackage(
         array $autoloadDefinition,
-        array $expectedFiles
+        array $expectedFiles,
     ): void {
         $rootPackage = $this->createMock(RootPackageInterface::class);
 
@@ -192,13 +191,12 @@ final class PackageAutoloadTest extends TestCase
         self::assertSame(
             $expectedFiles,
             PackageAutoload::fromComposerRootPackage($rootPackage, realpath(__DIR__ . '/..'))
-                           ->files()
+                           ->files(),
         );
     }
 
     /**
      * @return array<string, mixed>
-     *
      * @psalm-return array<string, array{0: array{
      *   classmap?: array<int, string>,
      *   files?: array<int, string>
@@ -256,12 +254,12 @@ final class PackageAutoloadTest extends TestCase
      */
     public function testNamespacesFromAutoloadDefinition(
         array $autoloadDefinition,
-        array $expectedNamespaces
+        array $expectedNamespaces,
     ): void {
         self::assertSame(
             $expectedNamespaces,
             PackageAutoload::fromAutoloadDefinition($autoloadDefinition, realpath(__DIR__ . '/..'))
-                           ->namespaces()
+                           ->namespaces(),
         );
     }
 
@@ -273,7 +271,7 @@ final class PackageAutoloadTest extends TestCase
      */
     public function testNamespacesFromRootPackage(
         array $autoloadDefinition,
-        array $expectedNamespaces
+        array $expectedNamespaces,
     ): void {
         $rootPackage = $this->createMock(RootPackageInterface::class);
 
@@ -284,13 +282,12 @@ final class PackageAutoloadTest extends TestCase
         self::assertSame(
             $expectedNamespaces,
             PackageAutoload::fromComposerRootPackage($rootPackage, realpath(__DIR__ . '/..'))
-                           ->namespaces()
+                           ->namespaces(),
         );
     }
 
     /**
      * @return array<string, mixed>
-     *
      * @psalm-return array<string, array{0: array{
      *  psr-0?: array<string, string|array<int, string>>,
      *  psr-4?: array<string, string|array<int, string>>
