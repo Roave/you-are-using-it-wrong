@@ -70,9 +70,7 @@ final class GenerateRepository
                         'psr-4' => ['Project\\' => './src'],
                     ],
                     'config' => [
-                        'allow-plugins' => [
-                            'roave/you-are-using-it-wrong' => true,
-                        ],
+                        'allow-plugins' => ['roave/you-are-using-it-wrong' => true],
                     ],
                     'require'           => array_merge(
                         ['roave/you-are-using-it-wrong' => $currentGitVersion . '-dev'],
