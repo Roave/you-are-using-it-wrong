@@ -16,30 +16,21 @@ final class Project
 {
     private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
-    private PackageAutoload $rootPackageAutoload;
-
     private PackagesRequiringStrictChecks $packagesRequiringStrictTypeChecks;
 
-    private bool $strictTypeChecksAreEnforcedByLocalInstallation;
-
-    private string $projectDirectory;
-
     private function __construct(
-        PackageAutoload $rootPackageAutoload,
+        private PackageAutoload $rootPackageAutoload,
         PackagesRequiringStrictChecks $packagesRequiringStrictChecks,
-        bool $strictTypeChecksAreEnforcedByLocalInstallation,
-        string $projectDirectory
+        private bool $strictTypeChecksAreEnforcedByLocalInstallation,
+        private string $projectDirectory,
     ) {
-        $this->rootPackageAutoload                            = $rootPackageAutoload;
-        $this->packagesRequiringStrictTypeChecks              = $packagesRequiringStrictChecks;
-        $this->strictTypeChecksAreEnforcedByLocalInstallation = $strictTypeChecksAreEnforcedByLocalInstallation;
-        $this->projectDirectory                               = $projectDirectory;
+        $this->packagesRequiringStrictTypeChecks = $packagesRequiringStrictChecks;
     }
 
     public static function fromComposerInstallationContext(
         RootPackageInterface $rootPackage,
         Locker $locker,
-        string $currentWorkingDirectory
+        string $currentWorkingDirectory,
     ): self {
         /** @psalm-var array{packages: array<int, array{name: string}>, packages-dev?: array<int, array{name: string}>} $lockData */
         $lockData = $locker->getLockData();
@@ -51,9 +42,9 @@ final class Project
                 array_merge($lockData['packages'], $lockData['packages-dev'] ?? []),
                 static function (array $package): bool {
                     return $package['name'] === self::THIS_PACKAGE_NAME;
-                }
+                },
             ) !== [],
-            $currentWorkingDirectory
+            $currentWorkingDirectory,
         );
     }
 

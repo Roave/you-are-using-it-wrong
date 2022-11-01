@@ -26,8 +26,8 @@ final class ProjectFilesToBeTypeCheckedTest extends TestCase
                     'psr-0'    => ['Foo_' => 'Composer'],
                     'classmap' => ['Psalm/ProjectFilesToBeTypeCheckedTest.php'],
                 ],
-                __DIR__ . '/..'
-            )
+                __DIR__ . '/..',
+            ),
         );
 
         $reflectionInclusive = new ReflectionProperty(ProjectFilesToBeTypeChecked::class, 'inclusive');

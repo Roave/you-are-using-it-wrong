@@ -55,14 +55,14 @@ final class PackagesRequiringStrictChecks
                 static function (array $packageDefinition) use ($projectInstallationPath): Package {
                     return Package::fromPackageDefinition(
                         $packageDefinition,
-                        $projectInstallationPath . '/vendor/' . $packageDefinition['name']
+                        $projectInstallationPath . '/vendor/' . $packageDefinition['name'],
                     );
                 },
-                array_merge($lockData['packages'], $lockData['packages-dev'] ?? [])
+                array_merge($lockData['packages'], $lockData['packages-dev'] ?? []),
             ),
             static function (Package $package): bool {
                 return $package->requiresStrictChecks();
-            }
+            },
         ));
     }
 
@@ -103,7 +103,7 @@ final class PackagesRequiringStrictChecks
             $namespaces,
             static function (string $namespace) use ($io): void {
                 self::printPackageNamespace($namespace, $io);
-            }
+            },
         );
     }
 

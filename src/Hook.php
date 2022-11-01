@@ -50,9 +50,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
         ];
     }
 
-    /**
-     * @throws RuntimeException
-     */
+    /** @throws RuntimeException */
     public static function runTypeChecks(Event $composerEvent): void
     {
         $io       = $composerEvent->getIO();
@@ -101,7 +99,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
             $files,
             ...$project
             ->packagesRequiringStrictTypeChecks()
-            ->namespacesForWhichUsagesAreToBeTypeChecked()
+            ->namespacesForWhichUsagesAreToBeTypeChecked(),
         );
         $projectAnalyzer = new ProjectAnalyzer($config, new Providers(new FileProvider()), new ReportOptions());
 

@@ -76,7 +76,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                 'Baz\\Tab\\',
                 'Taz\\Tar\\',
             ],
-            $packages->namespacesForWhichUsagesAreToBeTypeChecked()
+            $packages->namespacesForWhichUsagesAreToBeTypeChecked(),
         );
         self::assertSame(
             [
@@ -84,7 +84,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                 'baz/tab',
                 'taz/tar',
             ],
-            $packages->packagesForWhichUsagesAreToBeTypeChecked()
+            $packages->packagesForWhichUsagesAreToBeTypeChecked(),
         );
 
         $io = $this->createMock(IOInterface::class);
@@ -100,7 +100,7 @@ final class PackagesRequiringStrictChecksTest extends TestCase
                 [' - baz/tab'],
                 [' - - Baz\\Tab\\'],
                 [' - taz/tar'],
-                [' - - Taz\\Tar\\']
+                [' - - Taz\\Tar\\'],
             );
 
         $packages->printPackagesToBeCheckedToComposerIo($io);

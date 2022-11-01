@@ -9,7 +9,7 @@ use Symfony\Component\Process\Process;
 
 final class SimulatedInstallationTest extends TestCase
 {
-    private ?string $repository = null;
+    private string|null $repository = null;
 
     protected function tearDown(): void
     {
@@ -66,7 +66,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString('1 errors', $output);
         self::assertMatchesRegularExpression(
             '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, but 123 provided@',
-            $output
+            $output,
         );
 
         self::assertStringNotContainsString('No errors found!', $output);
@@ -91,7 +91,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString('1 errors', $output);
         self::assertMatchesRegularExpression(
             '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, but 123 provided@',
-            $output
+            $output,
         );
 
         self::assertStringNotContainsString('No errors found!', $output);
@@ -121,7 +121,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString('1 errors', $output);
         self::assertMatchesRegularExpression(
             '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, but 123 provided@',
-            $output
+            $output,
         );
 
         self::assertStringNotContainsString('No errors found!', $output);

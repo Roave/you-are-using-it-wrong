@@ -12,23 +12,16 @@ final class Package
 {
     private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
-    private string $name;
-
-    private PackageAutoload $autoload;
-
     /** @var string[] */
     private array $dependencies;
 
-    private function __construct(string $name, PackageAutoload $autoload, string ...$dependencies)
+    private function __construct(private string $name, private PackageAutoload $autoload, string ...$dependencies)
     {
-        $this->name         = $name;
-        $this->autoload     = $autoload;
         $this->dependencies = $dependencies;
     }
 
     /**
      * @param mixed[] $packageDefinition
-     *
      * @psalm-param array{
      *   name: string,
      *   require?: array<string, string>,
@@ -43,7 +36,7 @@ final class Package
         return new self(
             $packageDefinition['name'],
             PackageAutoload::fromAutoloadDefinition($packageDefinition['autoload'] ?? [], $installationPath),
-            ...array_keys($packageDefinition['require'] ?? [])
+            ...array_keys($packageDefinition['require'] ?? []),
         );
     }
 

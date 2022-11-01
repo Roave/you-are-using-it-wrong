@@ -15,18 +15,6 @@ use function array_values;
 /** @internal this class is only for supporting internal usage of composer json data */
 final class PackageAutoload
 {
-    /** @var array<string, array<int, string>> */
-    private array $psr4;
-
-    /** @var array<string, array<int, string>> */
-    private array $psr0;
-
-    /** @var array<int, string> */
-    private array $classMap;
-
-    /** @var array<int, string> */
-    private array $files;
-
     /**
      * @param array<string, array<int, string>> $psr4
      * @param array<string, array<int, string>> $psr0
@@ -34,20 +22,15 @@ final class PackageAutoload
      * @param array<int, string>                $files
      */
     private function __construct(
-        array $psr4,
-        array $psr0,
-        array $classMap,
-        array $files
+        private array $psr4,
+        private array $psr0,
+        private array $classMap,
+        private array $files,
     ) {
-        $this->psr4     = $psr4;
-        $this->psr0     = $psr0;
-        $this->classMap = $classMap;
-        $this->files    = $files;
     }
 
     /**
      * @param mixed[] $autoloadDefinition
-     *
      * @psalm-param array{
      *   psr-4?: array<string, string|array<int, string>>,
      *   psr-0?: array<string, string|array<int, string>>,
@@ -71,7 +54,7 @@ final class PackageAutoload
                 static function ($paths) use ($prefixWithCurrentDir): array {
                     return array_map($prefixWithCurrentDir, (array) $paths);
                 },
-                $autoloadDefinition['psr-4'] ?? []
+                $autoloadDefinition['psr-4'] ?? [],
             ),
             array_map(
                 /**
@@ -82,10 +65,10 @@ final class PackageAutoload
                 static function ($paths) use ($prefixWithCurrentDir): array {
                     return array_map($prefixWithCurrentDir, (array) $paths);
                 },
-                $autoloadDefinition['psr-0'] ?? []
+                $autoloadDefinition['psr-0'] ?? [],
             ),
             array_map($prefixWithCurrentDir, $autoloadDefinition['classmap'] ?? []),
-            array_map($prefixWithCurrentDir, $autoloadDefinition['files'] ?? [])
+            array_map($prefixWithCurrentDir, $autoloadDefinition['files'] ?? []),
         );
     }
 
@@ -111,7 +94,7 @@ final class PackageAutoload
             [],
             array_filter($this->classMap, 'is_dir'),
             ...array_values($this->psr0),
-            ...array_values($this->psr4)
+            ...array_values($this->psr4),
         )));
     }
 
@@ -121,7 +104,7 @@ final class PackageAutoload
         return array_filter(array_map('realpath', array_merge(
             [],
             array_filter($this->classMap, 'is_file'),
-            $this->files
+            $this->files,
         )));
     }
 

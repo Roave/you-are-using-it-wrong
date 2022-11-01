@@ -42,7 +42,7 @@ final class GenerateRepository
         $currentGitVersion = trim(
             (new Process(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], __DIR__ . '/../..'))
             ->mustRun()
-            ->getOutput()
+            ->getOutput(),
         );
 
         $vendorDependencies = array_filter(
@@ -50,9 +50,9 @@ final class GenerateRepository
                 static function (string $path): string {
                     return (string) realpath($path);
                 },
-                glob(__DIR__ . '/../../vendor/*/*')
+                glob(__DIR__ . '/../../vendor/*/*'),
             ),
-            'is_dir'
+            'is_dir',
         );
 
         /** this is used to add the `version` field with the correct value to the dependencies present in the
@@ -76,7 +76,7 @@ final class GenerateRepository
                         ['roave/you-are-using-it-wrong' => $currentGitVersion . '-dev'],
                         ...array_map(static function (string $dependency) use ($currentGitVersion): array {
                             return [$dependency => $currentGitVersion . '-dev'];
-                        }, $dependencies)
+                        }, $dependencies),
                     ),
                     'repositories'      => array_merge(
                         // @NOTE: disabling packagist won't work because this repository has complex dependencies
@@ -99,35 +99,33 @@ final class GenerateRepository
                                     (string) realpath(__DIR__ . '/../repositories/repository-depending-on-type-checks'),
                                     (string) realpath(__DIR__ . '/../repositories/repository-indirectly-depending-on-type-checks'),
                                     (string) realpath(__DIR__ . '/../repositories/repository-not-depending-on-type-checks'),
-                                ]
-                            )
-                        )
+                                ],
+                            ),
+                        ),
                     ),
                 ],
-                JSON_PRETTY_PRINT
-            )
+                JSON_PRETTY_PRINT,
+            ),
         );
 
         copy(
             __DIR__ . '/../repositories/project-with-violations/src/file-with-violations.php',
-            $installationTargetPath . '/src/file-with-violations.php'
+            $installationTargetPath . '/src/file-with-violations.php',
         );
 
         return $installationTargetPath;
     }
 
-    /**
-     * @param string[] $vendorDependencies
-     */
+    /** @param string[] $vendorDependencies */
     private static function addVersionToDependencies(array $vendorDependencies): void
     {
         $composerLockPath = __DIR__ . '/../../composer.lock';
 
-        /** @var object{packages: list<object{name: string, version: string}>} $composerLockPackages */
+        /** @psalm-var object{packages: list<object{name: string, version: string}>} $composerLockPackages */
         $composerLockPackages = json_decode(file_get_contents($composerLockPath));
 
         foreach ($vendorDependencies as $dependencyPath) {
-            /** @var object{name: string, version: string} $composerJson */
+            /** @psalm-var object{name: string, version: string} $composerJson */
             $composerJson = json_decode(file_get_contents($dependencyPath . '/composer.json'));
 
             $packageName = $composerJson->name;
@@ -136,7 +134,7 @@ final class GenerateRepository
                 $composerLockPackages->packages,
                 static function (object $package) use ($packageName) {
                     return $package->name === $packageName;
-                }
+                },
             ));
 
             if (! isset($packageLockData[0], $packageLockData[0]->version)) {
