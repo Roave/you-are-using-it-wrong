@@ -37,7 +37,11 @@ final class Hook implements PluginInterface, EventSubscriberInterface
         // Nothing to do here, as all features are provided through event listeners
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     *
+     * @return array<non-empty-string, 'runTypeChecks'|'runTypeChecks'>
+     */
     public static function getSubscribedEvents(): array
     {
         return [

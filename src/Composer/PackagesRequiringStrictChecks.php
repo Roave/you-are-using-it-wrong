@@ -10,6 +10,7 @@ use Composer\Package\Locker;
 use function array_filter;
 use function array_map;
 use function array_merge;
+use function array_values;
 use function array_walk;
 
 /** @internal this class is only for supporting internal usage of locker data */
@@ -17,12 +18,12 @@ final class PackagesRequiringStrictChecks
 {
     private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
-    /** @var Package[] */
+    /** @var array<int, Package> */
     private array $packages;
 
     private function __construct(Package ...$packages)
     {
-        $this->packages = $packages;
+        $this->packages = array_values($packages);
     }
 
     public static function fromComposerLocker(Locker $locker, string $projectInstallationPath): self
@@ -87,12 +88,9 @@ final class PackagesRequiringStrictChecks
     {
         $io->write('<info>' . self::THIS_PACKAGE_NAME . ':</info> following package usages will be checked:');
 
-        array_walk(
-            $this->packages,
-            static function (Package $package) use ($io): void {
-                self::printPackage($package, $io);
-            }
-        );
+        foreach ($this->packages as $package) {
+            self::printPackage($package, $io);
+        }
     }
 
     private static function printPackage(Package $package, IOInterface $io): void

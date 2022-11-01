@@ -16,6 +16,6 @@
 
     <rule ref="Doctrine">
         <!-- properties in psalm config do not use camel-case naming -->
-        <exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps"/>
+        <exclude name="Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps"/>
     </rule>
 </ruleset>

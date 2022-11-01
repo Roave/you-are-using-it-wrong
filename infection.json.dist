@@ -5,11 +5,11 @@
         ]
     },
     "logs": {
-        "text": "php://stderr",
-        "badge": {
-            "branch": "master"
+        "text": "php:\/\/stderr",
+        "stryker": {
+            "report": "/^\\d\\.\\d\\.x$/"
         }
     },
-    "minMsi": 84,
-    "minCoveredMsi": 100
+    "minMsi": 71,
+    "minCoveredMsi": 95
 }
