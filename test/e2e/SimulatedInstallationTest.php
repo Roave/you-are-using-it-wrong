@@ -65,7 +65,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString(' - - Test\\RepositoryDependingOnTypeChecks\\', $output);
         self::assertStringContainsString('1 errors', $output);
         self::assertMatchesRegularExpression(
-            '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, (int\(123\)|123) provided@',
+            '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, but 123 provided@',
             $output
         );
 
@@ -90,7 +90,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString(' - - Test\\RepositoryDependingOnTypeChecks\\', $output);
         self::assertStringContainsString('1 errors', $output);
         self::assertMatchesRegularExpression(
-            '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, (int\(123\)|123) provided@',
+            '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, but 123 provided@',
             $output
         );
 
@@ -120,7 +120,7 @@ final class SimulatedInstallationTest extends TestCase
         self::assertStringContainsString(' - - Test\\RepositoryDependingOnTypeChecks\\', $output);
         self::assertStringContainsString('1 errors', $output);
         self::assertMatchesRegularExpression(
-            '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, (int\(123\)|123) provided@',
+            '@Argument 1 of Test\\\\RepositoryDependingOnTypeChecks\\\\SomeClass::aMethod expects string, but 123 provided@',
             $output
         );
 
