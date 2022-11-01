@@ -120,15 +120,17 @@ final class GenerateRepository
     {
         $composerLockPath = __DIR__ . '/../../composer.lock';
 
-        $composerLockPackages = json_decode(file_get_contents($composerLockPath))->packages;
+        /** @var object{packages: list<object{name: string, version: string}>} $composerLockPackages */
+        $composerLockPackages = json_decode(file_get_contents($composerLockPath));
 
         foreach ($vendorDependencies as $dependencyPath) {
+            /** @var object{name: string, version: string} $composerJson */
             $composerJson = json_decode(file_get_contents($dependencyPath . '/composer.json'));
 
             $packageName = $composerJson->name;
 
             $packageLockData = array_values(array_filter(
-                $composerLockPackages,
+                $composerLockPackages->packages,
                 static function (object $package) use ($packageName) {
                     return $package->name === $packageName;
                 }
