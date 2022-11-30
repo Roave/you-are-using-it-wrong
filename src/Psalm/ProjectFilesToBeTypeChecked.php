@@ -8,17 +8,11 @@ use Psalm\Config\ProjectFileFilter;
 use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
 
 /** @internal this class is only for configuring psalm according to the defaults of this repository */
-final class ProjectFilesToBeTypeChecked extends ProjectFileFilter
+final class ProjectFilesToBeTypeChecked
 {
-    /** {@inheritDoc} */
-    public function __construct(bool $inclusive)
+    public static function fromAutoloadDefinitions(PackageAutoload $autoload): ProjectFileFilter
     {
-        parent::__construct($inclusive);
-    }
-
-    public static function fromAutoloadDefinitions(PackageAutoload $autoload): self
-    {
-        $instance = new self(true);
+        $instance = ProjectFileFilter::loadFromArray([], __DIR__, true);
 
         foreach ($autoload->directories() as $directory) {
             $instance->addDirectory($directory);

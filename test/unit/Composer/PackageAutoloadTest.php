@@ -8,6 +8,7 @@ use Composer\Package\RootPackageInterface;
 use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
 
+use function assert;
 use function realpath;
 
 /** @covers \Roave\YouAreUsingItWrong\Composer\PackageAutoload */
@@ -54,11 +55,17 @@ final class PackageAutoloadTest extends TestCase
     }
 
     /**
-     * @return array<string, mixed>
-     * @psalm-return array<string, array{0: array{
-     *  psr-0?: array<string, string|array<int, string>>,
-     *  psr-4?: array<string, string|array<int, string>>
-     * }, 1: array<int, string>}>
+     * @return array<
+     *     string,
+     *     array{
+     *         0: array{
+     *             psr-0?: array<non-empty-string, non-empty-string|non-empty-list<non-empty-string>>,
+     *             psr-4?: array<non-empty-string, non-empty-string|non-empty-list<non-empty-string>>,
+     *             classmap?: non-empty-list<non-empty-string>
+     *         },
+     *         1: list<non-empty-string>
+     *     }
+     * >
      */
     public function expectedDirectories(): array
     {
@@ -84,7 +91,7 @@ final class PackageAutoloadTest extends TestCase
                     'psr-4' => ['Non\\Existing\\' => 'Composer'],
                 ],
                 [
-                    realpath(__DIR__),
+                    self::realpath(__DIR__),
                 ],
             ],
             'definition with multiple existing psr-4 directories' => [
@@ -95,8 +102,8 @@ final class PackageAutoloadTest extends TestCase
                     ],
                 ],
                 [
-                    realpath(__DIR__),
-                    realpath(__DIR__ . '/../Psalm'),
+                    self::realpath(__DIR__),
+                    self::realpath(__DIR__ . '/../Psalm'),
                 ],
             ],
             'definition with non-existing psr-0 single directory' => [
@@ -116,7 +123,7 @@ final class PackageAutoloadTest extends TestCase
                     'psr-0' => ['Non_Existing_' => 'Composer'],
                 ],
                 [
-                    realpath(__DIR__),
+                    self::realpath(__DIR__),
                 ],
             ],
             'definition with multiple existing psr-0 directories' => [
@@ -127,8 +134,8 @@ final class PackageAutoloadTest extends TestCase
                     ],
                 ],
                 [
-                    realpath(__DIR__),
-                    realpath(__DIR__ . '/../Psalm'),
+                    self::realpath(__DIR__),
+                    self::realpath(__DIR__ . '/../Psalm'),
                 ],
             ],
             'definition with non-existing classmap'               => [
@@ -148,8 +155,8 @@ final class PackageAutoloadTest extends TestCase
                     'classmap' => ['Composer', 'Psalm'],
                 ],
                 [
-                    realpath(__DIR__),
-                    realpath(__DIR__ . '/../Psalm'),
+                    self::realpath(__DIR__),
+                    self::realpath(__DIR__ . '/../Psalm'),
                 ],
             ],
         ];
@@ -220,7 +227,7 @@ final class PackageAutoloadTest extends TestCase
                     'classmap' => ['Composer/PackageAutoloadTest.php'],
                 ],
                 [
-                    realpath(__FILE__),
+                    self::realpath(__FILE__),
                 ],
             ],
             'definition with file pointing to non-existing file' => [
@@ -234,7 +241,7 @@ final class PackageAutoloadTest extends TestCase
                     'files' => ['Composer/PackageAutoloadTest.php'],
                 ],
                 [
-                    realpath(__FILE__),
+                    self::realpath(__FILE__),
                 ],
             ],
             'definition with directory classmap'        => [
@@ -361,5 +368,15 @@ final class PackageAutoloadTest extends TestCase
                 ],
             ],
         ];
+    }
+
+    /** @return non-empty-string */
+    private static function realpath(string $path): string
+    {
+        $realpath = realpath($path);
+
+        assert($realpath !== false && $realpath !== '');
+
+        return $realpath;
     }
 }

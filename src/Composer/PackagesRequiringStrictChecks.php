@@ -18,10 +18,11 @@ final class PackagesRequiringStrictChecks
 {
     private const THIS_PACKAGE_NAME = 'roave/you-are-using-it-wrong';
 
-    /** @var array<int, Package> */
+    /** @var list<Package> */
     private array $packages;
 
-    private function __construct(Package ...$packages)
+    /** @param array<int, Package> $packages */
+    private function __construct(array $packages)
     {
         $this->packages = array_values($packages);
     }
@@ -50,7 +51,7 @@ final class PackagesRequiringStrictChecks
          */
         $lockData = $locker->getLockData();
 
-        return new self(...array_filter(
+        return new self(array_filter(
             array_map(
                 static function (array $packageDefinition) use ($projectInstallationPath): Package {
                     return Package::fromPackageDefinition(
@@ -66,7 +67,7 @@ final class PackagesRequiringStrictChecks
         ));
     }
 
-    /** @return array<int, string> */
+    /** @return list<string> */
     public function packagesForWhichUsagesAreToBeTypeChecked(): array
     {
         return array_map(static function (Package $package): string {
