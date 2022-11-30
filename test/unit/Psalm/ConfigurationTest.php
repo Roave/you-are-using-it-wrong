@@ -22,22 +22,19 @@ final class ConfigurationTest extends TestCase
     public function testConfigurationDefaults(): void
     {
         $reflectionFiles            = new ReflectionProperty(Configuration::class, 'project_files');
-        $reflectionPhpstormGenerics = new ReflectionProperty(Configuration::class, 'allow_phpstorm_generics');
         $reflectionUseDocblockTypes = new ReflectionProperty(Configuration::class, 'use_docblock_types');
         $reflectionInstance         = new ReflectionProperty(Config::class, 'instance');
         $reflectionIncludeCollector = new ReflectionProperty(Config::class, 'include_collector');
 
         $reflectionFiles->setAccessible(true);
-        $reflectionPhpstormGenerics->setAccessible(true);
         $reflectionUseDocblockTypes->setAccessible(true);
         $reflectionInstance->setAccessible(true);
         $reflectionIncludeCollector->setAccessible(true);
 
-        $projectFiles  = $this->createMock(ProjectFileFilter::class);
+        $projectFiles  = ProjectFileFilter::loadFromArray([], __DIR__, true);
         $configuration = Configuration::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles);
 
         self::assertSame($projectFiles, $reflectionFiles->getValue($configuration));
-        self::assertTrue($reflectionPhpstormGenerics->getValue($configuration));
         self::assertTrue($reflectionUseDocblockTypes->getValue($configuration));
         self::assertSame($configuration, $reflectionInstance->getValue($configuration));
         self::assertNotNull($reflectionIncludeCollector->getValue($configuration));
@@ -49,7 +46,7 @@ final class ConfigurationTest extends TestCase
         string $expectedReportingLevel,
         string ...$checkedNamespaces,
     ): void {
-        $projectFiles = $this->createMock(ProjectFileFilter::class);
+        $projectFiles = ProjectFileFilter::loadFromArray([], __DIR__, true);
 
         self::assertSame(
             $expectedReportingLevel,
@@ -59,8 +56,10 @@ final class ConfigurationTest extends TestCase
     }
 
     /**
-     * @return array<string, array<int, CodeIssue|string>>
-     * @psalm-return array<string, array{0: CodeIssue, 1: string}>
+     * @return array<
+     *     string,
+     *     array{0: CodeIssue, 1: string, 2?: non-empty-string, 3?: non-empty-string, 4?: non-empty-string}
+     * >
      */
     public function expectedReportingLevels(): array
     {

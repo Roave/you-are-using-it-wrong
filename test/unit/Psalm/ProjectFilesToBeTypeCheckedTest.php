@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RoaveTest\YouAreUsingItWrong\Psalm;
 
 use PHPUnit\Framework\TestCase;
+use Psalm\Config\ProjectFileFilter;
 use ReflectionProperty;
 use Roave\YouAreUsingItWrong\Composer\PackageAutoload;
 use Roave\YouAreUsingItWrong\Psalm\ProjectFilesToBeTypeChecked;
@@ -30,7 +31,7 @@ final class ProjectFilesToBeTypeCheckedTest extends TestCase
             ),
         );
 
-        $reflectionInclusive = new ReflectionProperty(ProjectFilesToBeTypeChecked::class, 'inclusive');
+        $reflectionInclusive = new ReflectionProperty(ProjectFileFilter::class, 'inclusive');
 
         $reflectionInclusive->setAccessible(true);
 
