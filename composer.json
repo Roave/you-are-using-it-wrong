@@ -20,7 +20,7 @@
         "composer/composer":        "^2.4.4",
         "doctrine/coding-standard": "^10.0.0",
         "infection/infection":      "^0.26.16",
-        "phpunit/phpunit":          "^9.5.26",
+        "phpunit/phpunit":          "^9.5.27",
         "symfony/process":          "^6.2.0"
     },
     "autoload": {
