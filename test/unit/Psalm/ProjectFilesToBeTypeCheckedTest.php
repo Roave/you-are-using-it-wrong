@@ -33,8 +33,6 @@ final class ProjectFilesToBeTypeCheckedTest extends TestCase
 
         $reflectionInclusive = new ReflectionProperty(ProjectFileFilter::class, 'inclusive');
 
-        $reflectionInclusive->setAccessible(true);
-
         self::assertSame([realpath(__DIR__ . '/../Composer') . '/'], $files->getDirectories());
         self::assertSame([realpath(__FILE__)], $files->getFiles());
         self::assertTrue($reflectionInclusive->getValue($files));
