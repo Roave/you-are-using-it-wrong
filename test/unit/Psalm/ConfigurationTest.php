@@ -25,14 +25,8 @@ final class ConfigurationTest extends TestCase
         $reflectionUseDocblockTypes = new ReflectionProperty(Configuration::class, 'use_docblock_types');
         $reflectionInstance         = new ReflectionProperty(Config::class, 'instance');
         $reflectionIncludeCollector = new ReflectionProperty(Config::class, 'include_collector');
-
-        $reflectionFiles->setAccessible(true);
-        $reflectionUseDocblockTypes->setAccessible(true);
-        $reflectionInstance->setAccessible(true);
-        $reflectionIncludeCollector->setAccessible(true);
-
-        $projectFiles  = ProjectFileFilter::loadFromArray([], __DIR__, true);
-        $configuration = Configuration::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles);
+        $projectFiles               = ProjectFileFilter::loadFromArray([], __DIR__, true);
+        $configuration              = Configuration::forStrictlyCheckedNamespacesAndProjectFiles($projectFiles);
 
         self::assertSame($projectFiles, $reflectionFiles->getValue($configuration));
         self::assertTrue($reflectionUseDocblockTypes->getValue($configuration));
