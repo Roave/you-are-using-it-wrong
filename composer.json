@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "composer/composer":        "^2.5.1",
-        "doctrine/coding-standard": "^11.0.0",
+        "doctrine/coding-standard": "^11.1.0",
         "infection/infection":      "^0.26.16",
         "phpunit/phpunit":          "^9.5.27",
         "symfony/process":          "^6.2.0"
