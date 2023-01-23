@@ -14,7 +14,7 @@
         "ext-json":                  "*",
         "composer-plugin-api":       "^2.1.0",
         "ocramius/package-versions": "^2.7.0",
-        "vimeo/psalm":               "^5.5.0"
+        "vimeo/psalm":               "^5.6.0"
     },
     "require-dev": {
         "composer/composer":        "^2.5.1",
