@@ -67,7 +67,7 @@ final class PackageAutoloadTest extends TestCase
      *     }
      * >
      */
-    public function expectedDirectories(): array
+    public static function expectedDirectories(): array
     {
         return [
             'empty definition'                                    => [
@@ -209,7 +209,7 @@ final class PackageAutoloadTest extends TestCase
      *   files?: array<int, string>
      * }, 1: array<int, string>}>
      */
-    public function expectedFiles(): array
+    public static function expectedFiles(): array
     {
         return [
             'empty definition'                          => [
@@ -300,7 +300,7 @@ final class PackageAutoloadTest extends TestCase
      *  psr-4?: array<string, string|array<int, string>>
      * }, 1: array<int, string>}>
      */
-    public function expectedNamespaces(): array
+    public static function expectedNamespaces(): array
     {
         return [
             'empty definition'                                    => [

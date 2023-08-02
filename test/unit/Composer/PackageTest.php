@@ -41,7 +41,7 @@ final class PackageTest extends TestCase
      * @return array<int, bool|string>
      * @psalm-return array<int, array{bool, array<non-empty-string, non-empty-string>}>
      */
-    public function dependencyCombinationsThatRequireStrictChecks(): array
+    public static function dependencyCombinationsThatRequireStrictChecks(): array
     {
         return [
             [

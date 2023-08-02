@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace RoaveTest\YouAreUsingItWrong\Psalm;
 
+use PHPUnit\Framework\MockObject\Generator as MockGenerator;
 use PHPUnit\Framework\TestCase;
 use Psalm\Config;
 use Psalm\Config\ProjectFileFilter;
@@ -55,15 +56,15 @@ final class ConfigurationTest extends TestCase
      *     array{0: CodeIssue, 1: string, 2?: non-empty-string, 3?: non-empty-string, 4?: non-empty-string}
      * >
      */
-    public function expectedReportingLevels(): array
+    public static function expectedReportingLevels(): array
     {
-        $classIssue             = $this->createMock(ClassIssue::class);
-        $propertyIssue          = $this->createMock(PropertyIssue::class);
-        $methodIssue            = $this->createMock(MethodIssue::class);
-        $functionIssue          = $this->createMock(FunctionIssue::class);
-        $argumentIssue          = $this->createMock(ArgumentIssue::class);
-        $anonymousArgumentIssue = $this->createMock(ArgumentIssue::class);
-        $genericIssue           = $this->createMock(CodeIssue::class);
+        $classIssue             = self::makeStub(ClassIssue::class);
+        $propertyIssue          = self::makeStub(PropertyIssue::class);
+        $methodIssue            = self::makeStub(MethodIssue::class);
+        $functionIssue          = self::makeStub(FunctionIssue::class);
+        $argumentIssue          = self::makeStub(ArgumentIssue::class);
+        $anonymousArgumentIssue = self::makeStub(ArgumentIssue::class);
+        $genericIssue           = self::makeStub(CodeIssue::class);
 
         $classIssue->fq_classlike_name = 'Foo\\Bar\\Baz';
         $propertyIssue->property_id    = 'Foo\\Bar\\Baz$property';
@@ -212,5 +213,26 @@ final class ConfigurationTest extends TestCase
                 'foo\\',
             ],
         ];
+    }
+
+    /**
+     * @param class-string<T> $class
+     *
+     * @return T
+     *
+     * @template T of object
+     */
+    private static function makeStub(string $class): object
+    {
+        $mockGenerator = new MockGenerator();
+
+        return $mockGenerator->getMock(
+            $class,
+            [],
+            [],
+            '',
+            false,
+            false,
+        );
     }
 }
