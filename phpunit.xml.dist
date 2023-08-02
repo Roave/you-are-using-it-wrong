@@ -2,22 +2,18 @@
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-    bootstrap="./vendor/autoload.php"
-    colors="true"
-    verbose="true"
-    columns="max"
-    beStrictAboutCoversAnnotation="true"
-    beStrictAboutResourceUsageDuringSmallTests="true"
     beStrictAboutChangesToGlobalState="true"
     beStrictAboutOutputDuringTests="true"
     beStrictAboutTodoAnnotatedTests="true"
     executionOrder="random"
+    beStrictAboutCoverageMetadata="true"
 >
-    <coverage>
+    <source>
         <include>
-            <directory suffix=".php">./src</directory>
+            <directory>src</directory>
         </include>
-    </coverage>
+    </source>
+
     <testsuites>
         <testsuite name="Roave\YouAreUsingItWrong tests">
             <directory>./test/unit</directory>
