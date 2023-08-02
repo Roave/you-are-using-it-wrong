@@ -205,7 +205,7 @@ final class ProjectTest extends TestCase
     }
 
     /** @return array<string[]> */
-    public function repositoryWithPsalmConfigurationProvider(): array
+    public static function repositoryWithPsalmConfigurationProvider(): array
     {
         return [
             [__DIR__ . '/../../..'],
