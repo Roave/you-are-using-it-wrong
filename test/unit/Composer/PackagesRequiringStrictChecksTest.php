@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RoaveTest\YouAreUsingItWrong\Composer;
 
-use Composer\IO\BufferIO;
+use Composer\IO\IOInterface;
 use Composer\Package\Locker;
 use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks;
@@ -87,13 +87,22 @@ final class PackagesRequiringStrictChecksTest extends TestCase
             $packages->packagesForWhichUsagesAreToBeTypeChecked(),
         );
 
-        $io = new BufferIO();
+        $output = new class {
+            public string $text = '';
+        };
+
+        $io = $this->createStub(IOInterface::class);
+
+        $io->method('write')
+            ->willReturnCallback(static function (string $text) use ($output): void {
+                $output->text .= $text . "\n";
+            });
 
         $packages->printPackagesToBeCheckedToComposerIo($io);
 
         self::assertEquals(
             <<<'OUTPUT'
-roave/you-are-using-it-wrong: following package usages will be checked:
+<info>roave/you-are-using-it-wrong:</info> following package usages will be checked:
  - foo/bar
  - - Foo\Bar\
  - - Foo\Baz\
@@ -104,7 +113,7 @@ roave/you-are-using-it-wrong: following package usages will be checked:
 
 OUTPUT
             ,
-            $io->getOutput(),
+            $output->text,
         );
     }
 
