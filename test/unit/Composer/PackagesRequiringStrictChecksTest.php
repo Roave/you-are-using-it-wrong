@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RoaveTest\YouAreUsingItWrong\Composer;
 
-use Composer\IO\IOInterface;
+use Composer\IO\BufferIO;
 use Composer\Package\Locker;
 use PHPUnit\Framework\TestCase;
 use Roave\YouAreUsingItWrong\Composer\PackagesRequiringStrictChecks;
@@ -87,23 +87,25 @@ final class PackagesRequiringStrictChecksTest extends TestCase
             $packages->packagesForWhichUsagesAreToBeTypeChecked(),
         );
 
-        $io = $this->createMock(IOInterface::class);
-
-        $io
-            ->expects(self::exactly(8))
-            ->method('write')
-            ->withConsecutive(
-                ['<info>roave/you-are-using-it-wrong:</info> following package usages will be checked:'],
-                [' - foo/bar'],
-                [' - - Foo\\Bar\\'],
-                [' - - Foo\\Baz\\'],
-                [' - baz/tab'],
-                [' - - Baz\\Tab\\'],
-                [' - taz/tar'],
-                [' - - Taz\\Tar\\'],
-            );
+        $io = new BufferIO();
 
         $packages->printPackagesToBeCheckedToComposerIo($io);
+
+        self::assertEquals(
+            <<<'OUTPUT'
+roave/you-are-using-it-wrong: following package usages will be checked:
+ - foo/bar
+ - - Foo\Bar\
+ - - Foo\Baz\
+ - baz/tab
+ - - Baz\Tab\
+ - taz/tar
+ - - Taz\Tar\
+
+OUTPUT
+            ,
+            $io->getOutput(),
+        );
     }
 
     public function testCanBeBuiltFromEmptyLockData(): void
