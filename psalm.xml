@@ -5,7 +5,13 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     name="Example Psalm config with recommended defaults"
     errorLevel="1"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="true"
 >
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    </plugins>
+
     <projectFiles>
         <directory name="src"/>
         <directory name="test/e2e"/>
