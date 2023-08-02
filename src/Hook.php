@@ -50,7 +50,7 @@ final class Hook implements PluginInterface, EventSubscriberInterface
         ];
     }
 
-    /** 
+    /**
      * @throws RuntimeException
      *
      * @psalm-suppress PossiblyUnusedMethod this method is only ever used in the context of hooks
