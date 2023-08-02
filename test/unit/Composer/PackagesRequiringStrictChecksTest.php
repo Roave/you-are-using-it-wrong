@@ -87,23 +87,34 @@ final class PackagesRequiringStrictChecksTest extends TestCase
             $packages->packagesForWhichUsagesAreToBeTypeChecked(),
         );
 
-        $io = $this->createMock(IOInterface::class);
+        $output = new class {
+            public string $text = '';
+        };
 
-        $io
-            ->expects(self::exactly(8))
-            ->method('write')
-            ->withConsecutive(
-                ['<info>roave/you-are-using-it-wrong:</info> following package usages will be checked:'],
-                [' - foo/bar'],
-                [' - - Foo\\Bar\\'],
-                [' - - Foo\\Baz\\'],
-                [' - baz/tab'],
-                [' - - Baz\\Tab\\'],
-                [' - taz/tar'],
-                [' - - Taz\\Tar\\'],
-            );
+        $io = $this->createStub(IOInterface::class);
+
+        $io->method('write')
+            ->willReturnCallback(static function (string $text) use ($output): void {
+                $output->text .= $text . "\n";
+            });
 
         $packages->printPackagesToBeCheckedToComposerIo($io);
+
+        self::assertEquals(
+            <<<'OUTPUT'
+<info>roave/you-are-using-it-wrong:</info> following package usages will be checked:
+ - foo/bar
+ - - Foo\Bar\
+ - - Foo\Baz\
+ - baz/tab
+ - - Baz\Tab\
+ - taz/tar
+ - - Taz\Tar\
+
+OUTPUT
+            ,
+            $output->text,
+        );
     }
 
     public function testCanBeBuiltFromEmptyLockData(): void

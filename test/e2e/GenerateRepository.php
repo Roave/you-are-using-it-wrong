@@ -27,11 +27,7 @@ use const JSON_PRETTY_PRINT;
 
 final class GenerateRepository
 {
-    private function __construct()
-    {
-    }
-
-    public static function generateRepository(string ...$dependencies): string
+    public static function for(string ...$dependencies): string
     {
         $installationTargetPath = tempnam(sys_get_temp_dir(), 'test-installation-');
 
