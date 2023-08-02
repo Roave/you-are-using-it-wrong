@@ -20,7 +20,7 @@ final class SimulatedInstallationTest extends TestCase
 
     public function testRepositoryWithoutIssues(): void
     {
-        $this->repository = GenerateRepository::generateRepository();
+        $this->repository = GenerateRepository::for();
 
         $command = (new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], $this->repository))
             ->mustRun();
@@ -35,7 +35,7 @@ final class SimulatedInstallationTest extends TestCase
 
     public function testRepositoryWithDependenciesNotDependingOnStrictTypeChecksWillNotHaveIssuesRaised(): void
     {
-        $this->repository = GenerateRepository::generateRepository('test/repository-not-depending-on-type-checks');
+        $this->repository = GenerateRepository::for('test/repository-not-depending-on-type-checks');
 
         $command = (new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], $this->repository))
             ->mustRun();
@@ -50,7 +50,7 @@ final class SimulatedInstallationTest extends TestCase
 
     public function testRepositoryReportsIssuesWhenDependingOnPackageThatEnforcesStrictTypeChecks(): void
     {
-        $this->repository = GenerateRepository::generateRepository('test/repository-depending-on-type-checks');
+        $this->repository = GenerateRepository::for('test/repository-depending-on-type-checks');
 
         $command = new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], $this->repository);
 
@@ -75,7 +75,7 @@ final class SimulatedInstallationTest extends TestCase
 
     public function testRepositoryReportsIssuesWhenDependingIndirectlyOnPackageThatEnforcesStrictTypeChecks(): void
     {
-        $this->repository = GenerateRepository::generateRepository('test/repository-indirectly-depending-on-type-checks');
+        $this->repository = GenerateRepository::for('test/repository-indirectly-depending-on-type-checks');
 
         $command = new Process([__DIR__ . '/../../vendor/bin/composer', 'install'], $this->repository);
 
@@ -100,7 +100,7 @@ final class SimulatedInstallationTest extends TestCase
 
     public function testRepositoryOnlyReportsIssuesOnDependencyUsagesThatEnforceStrictTypeChecks(): void
     {
-        $this->repository = GenerateRepository::generateRepository(
+        $this->repository = GenerateRepository::for(
             'test/empty-repository',
             'test/repository-depending-on-type-checks',
             'test/repository-indirectly-depending-on-type-checks',
