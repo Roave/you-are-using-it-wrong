@@ -50,7 +50,12 @@ final class Hook implements PluginInterface, EventSubscriberInterface
         ];
     }
 
-    /** @throws RuntimeException */
+    /** 
+     * @throws RuntimeException
+     *
+     * @psalm-suppress PossiblyUnusedMethod this method is only ever used in the context of hooks
+     *                                      declared in `composer.json`
+     */
     public static function runTypeChecks(Event $composerEvent): void
     {
         $io       = $composerEvent->getIO();
