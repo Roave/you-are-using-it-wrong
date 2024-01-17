@@ -224,7 +224,10 @@ final class ConfigurationTest extends TestCase
      */
     private static function makeStub(string $class): object
     {
-        return (new MockBuilder(new self(__METHOD__), $class))
+        /** @var MockBuilder<T> $builder */
+        $builder = new MockBuilder(new self(__METHOD__), $class);
+
+        return $builder
             ->disableOriginalConstructor()
             ->getMock();
     }
