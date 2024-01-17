@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php":                       "~8.1.0 || ~8.2.0",
+        "php":                       "~8.1.0 || ~8.2.0 || ~8.3.0",
         "ext-json":                  "*",
         "composer-plugin-api":       "^2.1.0",
         "ocramius/package-versions": "^2.8.0",
