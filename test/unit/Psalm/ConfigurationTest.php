@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RoaveTest\YouAreUsingItWrong\Psalm;
 
-use PHPUnit\Framework\MockObject\Generator as MockGenerator;
+use PHPUnit\Framework\MockObject\MockBuilder;
 use PHPUnit\Framework\TestCase;
 use Psalm\Config;
 use Psalm\Config\ProjectFileFilter;
@@ -224,15 +224,11 @@ final class ConfigurationTest extends TestCase
      */
     private static function makeStub(string $class): object
     {
-        $mockGenerator = new MockGenerator();
+        /** @var MockBuilder<T> $builder */
+        $builder = new MockBuilder(new self(__METHOD__), $class);
 
-        return $mockGenerator->getMock(
-            $class,
-            [],
-            [],
-            '',
-            false,
-            false,
-        );
+        return $builder
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }
