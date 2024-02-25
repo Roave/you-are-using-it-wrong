@@ -21,7 +21,7 @@
         "composer/composer":        "^2.7.1",
         "doctrine/coding-standard": "^12.0.0",
         "infection/infection":      "^0.27.10",
-        "phpunit/phpunit":          "^10.5.10",
+        "phpunit/phpunit":          "^10.5.11",
         "symfony/process":          "^7.0.3"
     },
     "autoload": {
