@@ -14,11 +14,11 @@
         "ext-json":                  "*",
         "composer-plugin-api":       "^2.1.0",
         "ocramius/package-versions": "^2.8.0",
-        "vimeo/psalm":               "^5.23.0",
+        "vimeo/psalm":               "^5.23.1",
         "psalm/plugin-phpunit": "^0.18.4"
     },
     "require-dev": {
-        "composer/composer":        "^2.7.1",
+        "composer/composer":        "^2.7.2",
         "doctrine/coding-standard": "^12.0.0",
         "infection/infection":      "^0.27.10",
         "phpunit/phpunit":          "^10.5.12",
