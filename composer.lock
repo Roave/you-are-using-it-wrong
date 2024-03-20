@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f704e067326e706f225408c76ecf5bc",
+    "content-hash": "09ac2b8aaa3cdef7c0bda4143da8e39a",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2941,16 +2941,16 @@
         },
         {
             "name": "infection/infection",
-            "version": "0.27.10",
+            "version": "0.27.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/infection.git",
-                "reference": "873cd3335774a114bef9ca93388e623bf362d820"
+                "reference": "6d55979c457eef2a5d0d80446c67ca533f201961"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/873cd3335774a114bef9ca93388e623bf362d820",
-                "reference": "873cd3335774a114bef9ca93388e623bf362d820",
+                "url": "https://api.github.com/repos/infection/infection/zipball/6d55979c457eef2a5d0d80446c67ca533f201961",
+                "reference": "6d55979c457eef2a5d0d80446c67ca533f201961",
                 "shasum": ""
             },
             "require": {
@@ -2987,7 +2987,7 @@
             "require-dev": {
                 "brianium/paratest": "^6.11",
                 "ext-simplexml": "*",
-                "fidry/makefile": "^0.2.0",
+                "fidry/makefile": "^1.0",
                 "helmich/phpunit-json-assert": "^3.0",
                 "phpspec/prophecy": "^1.15",
                 "phpspec/prophecy-phpunit": "^2.0",
@@ -2999,7 +2999,6 @@
                 "phpunit/phpunit": "^9.6",
                 "rector/rector": "^0.16.0",
                 "sidz/phpstan-rules": "^0.4.0",
-                "symfony/phpunit-bridge": "^5.4 || ^6.0 || ^7.0",
                 "symfony/yaml": "^5.4 || ^6.0 || ^7.0",
                 "thecodingmachine/phpstan-safe-rule": "^1.2.0"
             },
@@ -3057,7 +3056,7 @@
             ],
             "support": {
                 "issues": "https://github.com/infection/infection/issues",
-                "source": "https://github.com/infection/infection/tree/0.27.10"
+                "source": "https://github.com/infection/infection/tree/0.27.11"
             },
             "funding": [
                 {
@@ -3069,7 +3068,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-02-20T00:08:52+00:00"
+            "time": "2024-03-20T07:48:57+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
