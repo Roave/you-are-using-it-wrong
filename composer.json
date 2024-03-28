@@ -20,8 +20,8 @@
     "require-dev": {
         "composer/composer":        "^2.7.2",
         "doctrine/coding-standard": "^12.0.0",
-        "infection/infection":      "^0.27.11",
-        "phpunit/phpunit":          "^10.5.15",
+        "infection/infection":      "^0.28.1",
+        "phpunit/phpunit":          "^10.5.16",
         "symfony/process":          "^7.0.4"
     },
     "autoload": {
