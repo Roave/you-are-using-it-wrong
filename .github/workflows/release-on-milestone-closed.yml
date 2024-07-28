@@ -47,7 +47,7 @@ jobs:
           "GIT_AUTHOR_EMAIL": ${{ secrets.GIT_AUTHOR_EMAIL }}
 
       - name: "Bump Changelog Version On Originating Release Branch"
-        uses: "laminas/automatic-releases@v1"
+        uses: "laminas/automatic-releases@1.24.0"
         with:
           command-name: "laminas:automatic-releases:bump-changelog"
         env:
