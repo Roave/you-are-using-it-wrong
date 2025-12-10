@@ -1,5 +1,26 @@
 # roave/you-are-using-it-wrong
 
+## Archived: no longer necessary
+
+This project has been initially introduced to educate the PHP community about
+type checkers, their importance, and also to bother those that don't rely on them.
+
+This project won't be updated to support `vimeo/psalm:^6`, since it is both
+technically challenging, and no longer necessary, as type-checkers are now
+unequivocally part of the minimum toolkit of every professional PHP developer.
+
+Since the [first release of this package](https://github.com/Roave/you-are-using-it-wrong/releases/tag/1.0.0)
+in 2019, the community has grown, and we are proud of the work we've done to
+advocate for type-checkers.
+
+We've been noisy, annoying, cheeky about it: it has actually helped a lot!
+
+To everyone that now pushes for better coding practices through
+[`vimeo/psalm`](https://github.com/vimeo/psalm) and
+[`phpstan/phpstan`](https://github.com/phpstan/phpstan-src/): thank you ♥️.
+
+## Overview
+
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Froave%2Fyou-are-using-it-wrong)](https://dashboard.stryker-mutator.io/reports/github.com/roave/you-are-using-it-wrong/master)
 [![Type Coverage](https://shepherd.dev/github/roave/you-are-using-it-wrong/coverage.svg)](https://shepherd.dev/github/roave/you-are-using-it-wrong)
 [![Packagist](https://img.shields.io/packagist/v/roave/you-are-using-it-wrong.svg)](https://packagist.org/packages/roave/you-are-using-it-wrong)
